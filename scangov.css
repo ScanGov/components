@@ -100,6 +100,10 @@
     color: #c7efe2;
 }
 
+.fa-hand, .fa-hands, .fa-hands-clapping, .fa-handshake-simple, .fa-handshake-angle, .fa-hand-peace, .fa-hand-pointer, .fa-hand-point-up, .fa-hand-point-down, .fa-hand-point-right, .fa-hand-point-left {
+    color: #face00;
+}
+
 .fa-heart {
     color: #ff8d7b;
 }
