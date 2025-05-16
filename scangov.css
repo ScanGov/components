@@ -1,6 +1,6 @@
 /* This file is maintaned in https://github.com/ScanGov/components and copied to multiple projects during startup */
 
-.fa-solid {}
+/* Icons */
 
 .fa-arrows-rotate {
     color: #ffe396 !important;
@@ -210,4 +210,13 @@
 
 .fa-window-maximize {
     color: #ffcdd5;
+}
+
+/* Alerts */
+
+.alert-primary {
+    --bs-alert-color: var(--bs-bs-body-color);
+    --bs-alert-bg: var(--bs-body-bg);
+    --bs-alert-border-color: var(--bs-border);
+    --bs-alert-link-color: var(--bs-link-color);
 }
