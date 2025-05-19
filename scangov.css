@@ -116,6 +116,10 @@
     color: #ffffff !important;
 }
 
+.fa-lightbulb {
+    color: #ffe396;
+}
+
 .fa-link {
     color: #7efbe1;
 }
@@ -210,13 +214,4 @@
 
 .fa-window-maximize {
     color: #ffcdd5;
-}
-
-/* Alerts */
-
-.alert-primary {
-    --bs-alert-color: var(--bs-bs-body-color);
-    --bs-alert-bg: var(--bs-body-bg);
-    --bs-alert-border-color: var(--bs-border);
-    --bs-alert-link-color: var(--bs-link-color);
 }
