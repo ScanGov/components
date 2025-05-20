@@ -160,6 +160,10 @@
     color: #e6e6e6;
 }
 
+.fa-rocket {
+    color: #e6e6e6;
+}
+
 .fa-satellite-dish {
     color: #c3ebfa !important;
 }
@@ -202,6 +206,10 @@
 
 .fa-universal-access {
     color: #a8f2ff;
+}
+
+.fa-user-astronaut {
+    color: #f8b9c5;
 }
 
 .fa-user-shield {
