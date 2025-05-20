@@ -60,6 +60,10 @@
     color: #c5c5f3 !important;
 }
 
+.fa-crown {
+    color: #ffe396 !important;
+}
+
 .fa-dashboard {
     color: #ffbc78;
 }
@@ -230,4 +234,10 @@
 
 .fa-window-maximize {
     color: #ffcdd5;
+}
+
+/* Cards */
+
+a.cardlink:hover {
+    filter: brightness(1.3);
 }
