@@ -42,6 +42,10 @@
     color: #70e17b !important;
 }
 
+.fa-circle-nodes {
+    color: #c3ebfa;
+}
+
 /*
 .fa-circle-info {
     color: #b8d293 !important;
@@ -128,6 +132,10 @@
     color: #ffe396;
 }
 
+.fa-key {
+    color: #f8b9c5;
+}
+
 .fa-link {
     color: #7efbe1;
 }
@@ -148,7 +156,7 @@
     color: #f8b9c5;
 }
 
-.fa-circle-nodes {
+.fa-paper-plane {
     color: #c3ebfa;
 }
 
@@ -162,6 +170,10 @@
 
 .fa-rectangle-list {
     color: #f8b9c5;
+}
+
+.fa-right-from-bracket {
+    color: #ff8d7b;
 }
 
 .fa-robot {
