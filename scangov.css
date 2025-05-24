@@ -22,6 +22,10 @@
     color: #fdb8ae !important;
 }
 
+.fa-building {
+    color: #58b4ff !important;
+}
+
 .fa-bullhorn {
     color: #96abee !important;
 }
@@ -108,6 +112,10 @@
     color: #ffbc78;
 }
 
+.fa-gear {
+    color: #a1d3ff;
+}
+
 .fa-graduation-cap {
     color: #c7efe2;
 }
@@ -181,7 +189,7 @@
 }
 
 .fa-rocket {
-    color: #e6e6e6;
+    color: #d0c3e9;
 }
 
 .fa-satellite-dish {
