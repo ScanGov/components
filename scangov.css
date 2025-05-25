@@ -244,6 +244,10 @@
     color: #f8b9c5;
 }
 
+.fa-user-group {
+    color: #f8b9c5;
+}
+
 .fa-user-shield {
     color: #f3bf90;
 }
@@ -258,6 +262,16 @@
 
 /* Cards */
 
+a.cardlink {
+    transition: 0.5s filter;
+}
+
 a.cardlink:hover {
     filter: brightness(1.3);
+}
+
+/* Forms */
+
+.form-control:focus {
+    border-color: var(--bs-link-color);
 }
