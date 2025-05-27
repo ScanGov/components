@@ -262,11 +262,11 @@
 
 /* Cards */
 
-a.cardlink {
+.card-hover {
     transition: 0.5s filter;
 }
 
-a.cardlink:hover {
+.card-hover:hover {
     filter: brightness(1.3);
 }
 
