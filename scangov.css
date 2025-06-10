@@ -1,5 +1,20 @@
 /* This file is maintaned in https://github.com/ScanGov/components and copied to multiple projects during startup */
 
+/* Root */
+
+:root, [data-bs-theme=dark], [data-bs-theme=light] {
+    --bs-body-color: #fff;
+    --bs-body-color-rgb: 255, 255, 255;
+    --bs-body-bg: #13171f;
+    --bs-body-bg-rgb: 19, 23, 31;
+    --bs-link-color: #70e17b;
+    --bs-link-color-rgb: 112, 225, 123;
+    --bs-link-hover-color: var(--bs-link-color);
+    --bs-link-hover-color-rgb: 112, 225, 123;
+    --bs-selection-bg: var(--bs-link-color);
+    --bs-selection-color: var(--bs-body-bg);
+}
+
 /* Icons */
 
 .fa-arrows-rotate {
