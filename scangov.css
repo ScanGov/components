@@ -15,6 +15,14 @@
     --bs-selection-color: var(--bs-body-bg);
 }
 
+/* Navbar */
+
+#logo {
+    max-width: 35px;
+    width: 100%;
+    height: 100%;
+}
+
 /* Icons */
 
 .fa-arrows-rotate {
