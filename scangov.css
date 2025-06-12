@@ -25,6 +25,26 @@
 
 /* Icons */
 
+/* Brands */
+
+.fa-brands .fa-github {
+    color: #96abee !important;
+}
+
+.fa-brands .fa-discord {
+    color: #f8b9c5 !important;
+}
+
+.fa-brands .fa-linkedin {
+    color: #c3ebfa !important;
+}
+
+.fa-brands .fa-youtube {
+    color: #fd8ba0 !important;
+}
+
+/* General */
+
 .fa-arrows-rotate {
     color: #c5ee93 !important;
 }
@@ -43,10 +63,6 @@
 
 .fa-brain {
     color: #fdb8ae !important;
-}
-
-.fa-building {
-    color: #58b4ff !important;
 }
 
 .fa-bullhorn {
@@ -217,6 +233,10 @@
 
 .fa-rocket {
     color: #d0c3e9;
+}
+
+.fa-rss {
+    color: #ffbc78;
 }
 
 .fa-satellite-dish {
