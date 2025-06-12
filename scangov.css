@@ -13,6 +13,20 @@
     --bs-link-hover-color-rgb: 112, 225, 123;
     --bs-selection-bg: var(--bs-link-color);
     --bs-selection-color: var(--bs-body-bg);
+    --bs-font-monospace: "JetBrains Mono Medium", monospace;
+    --bs-font-light: "Public Sans Light", sans-serif;
+    --bs-font-bold: "Public Sans Bold", sans-serif;
+    --bs-font-regular: "Public Sans Regular", sans-serif;
+    --bs-font-serif: "Merriweather Light", sans-serif;
+    --bs-font-thin: "Public Sans Thin", sans-serif;
+    --bs-font-extra-bold: "Public Sans ExtraBold", sans-serif;
+    --bs-font-sans-serif: "Public Sans Regular", sans-serif;
+}
+
+/* General */
+
+strong {
+    font-family: var(--bs-font-bold);
 }
 
 /* Navbar */
@@ -21,6 +35,14 @@
     max-width: 35px;
     width: 100%;
     height: 100%;
+}
+
+/* Breadcrumb */
+
+.breadcrumb-item a, .breadcrumb-item a:visited {
+    color: var(--bs-body-color);
+    font-weight: var(--bs-font-bold);
+    text-decoration: none;
 }
 
 /* Icons */
@@ -169,6 +191,10 @@
 
 .fa-heart {
     color: #ff8d7b;
+}
+
+.fa-house {
+    color: #b7f5bd;
 }
 
 .fa-laptop {
@@ -327,4 +353,88 @@ iframe {
 
 .form-control:focus {
     border-color: var(--bs-link-color);
+}
+
+/* Anchor links */
+
+h2 a#heading-hashtag,
+h3 a#heading-hashtag {
+    display: none;
+}
+
+h2:hover a#heading-hashtag,
+h3:hover a#heading-hashtag {
+    display: revert;
+}
+
+/* News posts */
+
+.post-content h2 {
+    margin-top: 2.75rem;
+}
+
+.post-content ul, .post-content p {
+    margin-bottom: 1.75rem;
+}
+
+/* File types */
+a[href$=".doc"]::after,
+a[href$=".docx"]::after,
+a[href$=".ppt"]::after,
+a[href$=".pptx"]::after,
+a[href$=".xls"]::after,
+a[href$=".xlsx"]::after,
+a[href$=".pdf"]::after,
+a[href$=".mp3"]::after,
+a[href$=".mp4"]::after,
+a[href$=".avi"]::after,
+a[href$=".mpg"]::after,
+a[href$=".mpeg"]::after,
+a[href$=".mov"]::after,
+a[href$=".wmv"]::after,
+a[href$=".mkv"]::after,
+a[href$=".jpg"]::after,
+a[href$=".jpeg"]::after,
+a[href$=".png"]::after,
+a[href$=".gif"]::after {
+    content: "";
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    margin-left: 0.5rem;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+/* Doc */
+a[href$=".doc"]::after,
+a[href$=".docx"]::after {
+    background-image: url(/assets/font-awesome/svgs/solid/file-word.svg);
+}
+
+/* PowerPoint */
+a[href$=".ppt"]::after,
+a[href$=".pptx"]::after {
+    background-image: url(/assets/font-awesome/svgs/solid/file-powerpoint.svg);
+}
+
+/* Excel */
+a[href$=".xls"]::after,
+a[href$=".xlsx"]::after {
+    background-image: url(/assets/font-awesome/svgs/solid/file-excel.svg);
+}
+
+/* PDF */
+a[href$=".pdf"]::after {
+    background-image: url(/assets/font-awesome/svgs/solid/file-pdf.svg);
+}
+
+/* MP3 */
+a[href$=".mp3"]::after {
+    background-image: url(/assets/font-awesome/svgs/solid/file-audio.svg);
+}
+
+/* MP4 */
+a[href$=".mp4"]::after {
+    background-image: url(/assets/font-awesome/svgs/solid/file-video.svg);
 }
