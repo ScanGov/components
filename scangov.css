@@ -40,7 +40,7 @@ strong {
 /* Breadcrumb */
 
 .breadcrumb-item a, .breadcrumb-item a:visited {
-    color: var(--bs-body-color);
+    color: var(--bs-link-color);
     font-weight: var(--bs-font-bold);
     text-decoration: none;
 }
@@ -194,7 +194,7 @@ strong {
 }
 
 .fa-house {
-    color: #b7f5bd;
+    color: #ff8d7b;
 }
 
 .fa-laptop {
