@@ -29,6 +29,13 @@ strong {
     font-family: var(--bs-font-bold);
 }
 
+/* Selection */
+
+::selection {
+    background-color: var(--bs-selection-bg);
+    color: var(--bs-selection-color);
+}
+
 /* Navbar */
 
 #logo {
@@ -190,6 +197,10 @@ strong {
 }
 
 .fa-heart {
+    color: #ff8d7b;
+}
+
+.fa-heart-crack {
     color: #ff8d7b;
 }
 
