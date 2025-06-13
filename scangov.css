@@ -25,7 +25,33 @@
 
 /* General */
 
+body {
+    color: var(--bs-body-color);
+    background: var(--bs-body-bg);
+    background-color: var(--bs-body-bg);
+    font-family: var(--bs-font-sans-serif);
+}
+
 strong {
+    font-family: var(--bs-font-bold);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+.display-1,
+.display-2,
+.display-3,
+.display-4 {
     font-family: var(--bs-font-bold);
 }
 
@@ -48,7 +74,7 @@ strong {
 
 .breadcrumb-item a, .breadcrumb-item a:visited {
     color: var(--bs-link-color);
-    font-weight: var(--bs-font-bold);
+    font-family: var(--bs-font-bold);
     text-decoration: none;
 }
 
@@ -92,6 +118,10 @@ strong {
 
 .fa-brain {
     color: #fdb8ae !important;
+}
+
+.fa-building {
+    color: #b7f5bd !important;
 }
 
 .fa-bullhorn {
@@ -205,7 +235,7 @@ strong {
 }
 
 .fa-house {
-    color: #ff8d7b;
+    color: #ad79e9;
 }
 
 .fa-laptop {
