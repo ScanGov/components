@@ -7,8 +7,11 @@
     --bs-body-color-rgb: 255, 255, 255;
     --bs-body-bg: #13171f;
     --bs-body-bg-rgb: 19, 23, 31;
-    --bs-link-color: #70e17b;
-    --bs-link-color-rgb: 112, 225, 123;
+    --scangov-green: #70e17b;
+    --scangov-green-rgb: 112, 225, 123;
+    --bs-link-color: var(--scangov-green);
+    --bs-link-color-rgb: var(--scangov-green-rgb);
+    --bs-success-rgb: var(--scangov-green-rgb);
     --bs-link-hover-color: var(--bs-link-color);
     --bs-link-hover-color-rgb: 112, 225, 123;
     --bs-selection-bg: var(--bs-link-color);
