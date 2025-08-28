@@ -89,6 +89,10 @@ h6,
 
 /* Brands */
 
+.fa-bluesky {
+    color: #96abee !important;
+}
+
 .fa-github {
     color: #96abee !important;
 }
@@ -99,6 +103,10 @@ h6,
 
 .fa-linkedin {
     color: #c3ebfa !important;
+}
+
+.fa-mastoodon {
+    color: #f8b9c5 !important;
 }
 
 .fa-youtube {
