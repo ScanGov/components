@@ -163,8 +163,16 @@ h6,
     color: #ffb4cf !important;
 }
 
+.fa-circle {
+    color: #97d4ea !important;
+}
+
 .fa-circle-check {
     color: #70e17b !important;
+}
+
+.fa-circle-dot {
+    color: #f3bf90 !important;
 }
 
 .fa-circle-down {
