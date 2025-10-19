@@ -417,6 +417,12 @@ h6,
     color: #ffb4cf;
 }
 
+/*
+.fa-sort {
+    color: #fff;
+}
+*/
+
 .fa-spray-can-sparkles {
     color: #f8b9c5;
 }
@@ -531,6 +537,13 @@ h3 a#heading-hashtag {
 h2:hover a#heading-hashtag,
 h3:hover a#heading-hashtag {
     display: revert;
+}
+
+/* Bootstrap */
+
+.badge {
+    border-radius: .25rem;
+    font-family: 'Public Sans Light', sans-serif !important;
 }
 
 /* News posts */
