@@ -1,0 +1,33 @@
+<footer>
+  {% if footer %}
+  <div class="container mt-5 pt-5 border-top">
+    <div class="row">
+      {% for col in footer %}
+        <div class="col-6 col-sm-6 col-md-3 mb-3">
+          <ul class="nav flex-column">
+            {% for item in col %}
+              <li class="small mb-1">
+                <a href="{{ item.url }}" class="nav-link p-0 text-body-secondary">{{ item.title }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+  <div class="container-fluid py-4 mt-4 border-top">
+    <div class="row">
+      <div class="col-12 text-center">
+        <p class="small">Built with <i class="fa-solid fa-heart" aria-label="Heart"></i> by
+          <a href="{{ site['org-url'] }}">{{ site.org }}</a></p>
+      </div>
+    </div>
+  </div>
+</footer>
+{% include "analytics.html" %}
+{% include "js.html" %}
+{% include "feedback.html" %}
+{% getBundle "fontawesome" %}
+</body>
+</html>
