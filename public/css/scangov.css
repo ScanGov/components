@@ -440,10 +440,8 @@ a.list-group-item:hover {
 
 /* External link icon (post content only) */
 
-.post-content a[href^="http"]:not([href^="https://scangov.org"]):not([href^="https://standards.scangov.org"]):not([href^="https://scangov.com"]):not([href^="https://data.scangov.org"]):not([href^="http://localhost:4000/"]):not([href^="https://docs.scangov.org"])::after {
-    content: "\f35d";
-    font-family: "Font Awesome 5 Free";
-    font-weight: 900;
+.post-content a[href^="http"]:not([href^="https://scangov.org"]):not([href^="https://standards.scangov.org"]):not([href^="https://scangov.com"]):not([href^="https://my.scangov.com"]):not([href^="https://data.scangov.org"]):not([href^="http://localhost:4000/"]):not([href^="https://docs.scangov.org"])::after {
+    content: "\2197";
     margin-left: 5px;
     font-size: 0.8em;
     display: inline-block;
@@ -564,8 +562,9 @@ a.btn-primary-outline:not(.active):focus {
     transition: filter 0.25s ease;
 }
 
-.feedback i, .feedback svg {
-    color: var(--bs-primary-text) !important;
+.feedback i, .feedback svg,
+.btn-primary i, .btn-primary svg {
+    color: inherit !important;
 }
 
 .feedback:hover, .feedback:focus,
@@ -2143,4 +2142,18 @@ th a:focus i, th a:focus svg {
         border-top-left-radius: var(--bs-list-group-border-radius);
         border-bottom-left-radius: var(--bs-list-group-border-radius);
     }
+}
+
+/* Card links: underline on hover only */
+.card a:not(.btn):not(.stretched-link) {
+    text-decoration: none;
+}
+.card a:not(.btn):not(.stretched-link):hover {
+    text-decoration: underline;
+}
+.card .stretched-link {
+    text-decoration: none;
+}
+.card .stretched-link:hover {
+    text-decoration: underline;
 }
