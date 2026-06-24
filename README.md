@@ -17,9 +17,9 @@ Outputs `/robots.txt`. Allows all crawlers and references the sitemap.
 Requires in `site.json`:
 - `url` — site base URL
 
-### `security.njk`
+### `security.njk` + `security-root.njk`
 
-Outputs `/.well-known/security.txt`. Standard security disclosure file per [securitytxt.org](https://securitytxt.org/).
+Outputs `/.well-known/security.txt` (canonical) and `/security.txt` (convenience copy). Standard security disclosure file per [securitytxt.org](https://securitytxt.org/). Both files serve identical content; the Canonical field in both points to `/.well-known/security.txt`. Two files are required because GitHub Pages is static and cannot redirect between paths.
 
 Requires in `site.json`:
 - `url` — site base URL
