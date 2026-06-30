@@ -8,11 +8,11 @@
 {% set topnavUrls = ["https://scangov.com", "https://standards.scangov.org", "https://scangov.org", "https://docs.scangov.org", "https://data.scangov.org"] %}
 {% if site.url in topnavUrls %}
 <div class="d-none d-md-block">
-  <div class="d-flex justify-content-end border-bottom py-1">
-    <ul class="nav nav-pills small">
+  <div class="d-flex justify-content-end border-bottom pt-1 pb-0">
+    <ul class="nav nav-tabs topnav small mb-0">
       {% for item in topnav %}
         <li class="nav-item">
-          <a class="nav-link btn btn-primary-outline mx-1{% if item.url == site.url %} active{% endif %}"
+          <a class="nav-link mx-1{% if item.url == site.url %} active{% endif %}"
              {% if item.url == site.url %}aria-current="page"{% endif %}
              href="{{ item.url }}">
             <i class="{{ item.icon }} me-1"></i>{{ item.title }}</a>
