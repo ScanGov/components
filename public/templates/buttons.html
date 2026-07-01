@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Buttons – ScanGov components</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="../css/scangov.css">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-md border-bottom">
+  <div class="container-fluid">
+    <a class="navbar-brand small" href="index.html">
+      <i class="fa-solid fa-bars-progress me-1" aria-hidden="true"></i>
+      ScanGov
+    </a>
+  </div>
+</nav>
+
+<main id="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 col-md-10 col-lg-8 py-3">
+
+        <h1 class="display-6">Buttons</h1>
+        <p class="text-body-secondary">
+          Two button patterns in regular use: primary and outline. Both get custom
+          scangov styling on top of Bootstrap. Be careful with <code>btn-outline-primary</code>
+          (Bootstrap class, customized) vs <code>btn-primary-outline</code>
+          (scangov-only, for nav-pills — documented separately below).
+        </p>
+
+        <!-- Primary -->
+        <h2 class="h4 mt-5">Primary</h2>
+        <p class="small text-body-secondary">
+          Standard call-to-action button. Uses <code>var(--bs-primary)</code> for background
+          and border, so it inherits the site's brand color. Add an icon with
+          <code>me-2</code> margin before the label.
+        </p>
+        <div class="d-flex gap-2 flex-wrap align-items-center mb-3">
+          <a href="#" class="btn btn-primary btn-lg"><i class="fa-solid fa-rocket me-2" aria-hidden="true"></i>Get started</a>
+          <a href="#" class="btn btn-primary"><i class="fa-solid fa-calendar-check me-2" aria-hidden="true"></i>Schedule demo</a>
+          <a href="#" class="btn btn-primary btn-sm">Learn more</a>
+        </div>
+        <pre class="border rounded p-3 small mb-5"><code>&lt;a href="..." class="btn btn-primary btn-lg"&gt;
+  &lt;i class="fa-solid fa-rocket me-2" aria-hidden="true"&gt;&lt;/i&gt;Get started
+&lt;/a&gt;
+&lt;a href="..." class="btn btn-primary"&gt;Default&lt;/a&gt;
+&lt;a href="..." class="btn btn-primary btn-sm"&gt;Small&lt;/a&gt;</code></pre>
+
+        <!-- Outline -->
+        <h2 class="h4 mt-5">Outline</h2>
+        <p class="small text-body-secondary">
+          Use for secondary actions. <strong>Non-obvious behavior:</strong>
+          <code>scangov.css</code> adds <code>margin-top: 1rem</code> to
+          <code>.btn.btn-outline-primary</code> automatically <em>unless</em>
+          <code>.btn-lg</code> is also present. This is intentional spacing for inline
+          use alongside body text — but wrap in a flex/grid container with
+          <code>align-items-center</code> or override with <code>mt-0</code> if the
+          automatic margin causes layout issues.
+        </p>
+        <div class="mb-3">
+          <a href="#" class="btn btn-outline-primary btn-lg">Large outline (no auto-margin)</a>
+        </div>
+        <div class="mb-3">
+          <a href="#" class="btn btn-outline-primary">Default outline (gets margin-top: 1rem)</a>
+        </div>
+        <div class="mb-3">
+          <a href="#" class="btn btn-outline-primary btn-sm">Small outline (gets margin-top: 1rem)</a>
+        </div>
+        <pre class="border rounded p-3 small mb-5"><code>&lt;a href="..." class="btn btn-outline-primary btn-lg"&gt;Large outline&lt;/a&gt;
+&lt;a href="..." class="btn btn-outline-primary"&gt;Default outline&lt;/a&gt;
+&lt;a href="..." class="btn btn-outline-primary btn-sm"&gt;Small outline&lt;/a&gt;</code></pre>
+
+        <!-- btn-primary-outline (nav-pills only) -->
+        <h2 class="h4 mt-5"><code>btn-primary-outline</code> — nav-pills only</h2>
+        <p class="small text-body-secondary">
+          <code>a.btn-primary-outline</code> is <strong>not</strong> a general button variant.
+          Despite the similar name, it's a different class from Bootstrap's
+          <code>btn-outline-primary</code>. It's styled specifically for
+          <code>.nav-pills a.btn-primary-outline</code> — the active/hover/focus rules
+          in <code>scangov.css</code> are all scoped to <code>.nav-pills</code>.
+          Using it outside a nav-pills context will produce unstyled or inconsistent output.
+          See <a href="nav-tabs.html">nav-tabs.html</a> for correct usage in context.
+        </p>
+        <ul class="nav nav-pills mb-3">
+          <li class="nav-item">
+            <a class="btn-primary-outline nav-link active" aria-current="page" href="#">Active pill</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn-primary-outline nav-link" href="#">Inactive pill</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn-primary-outline nav-link" href="#">Another pill</a>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+  </div>
+</main>
+
+</body>
+</html>

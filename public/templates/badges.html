@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Badges – ScanGov components</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="../css/scangov.css">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-md border-bottom">
+  <div class="container-fluid">
+    <a class="navbar-brand small" href="index.html">
+      <i class="fa-solid fa-bars-progress me-1" aria-hidden="true"></i>
+      ScanGov
+    </a>
+  </div>
+</nav>
+
+<main id="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 col-md-10 col-lg-8 py-3">
+
+        <h1 class="display-6">Badges</h1>
+        <p class="text-body-secondary">
+          Grade and score badges use <code>class="badge text-bg-{color}"</code>.
+          <code>scangov.css</code> overrides Bootstrap's success/warning/danger colors
+          with WCAG 2.2 AA-verified values — don't hard-code the hex values in markup, just use the class.
+        </p>
+
+        <!-- Grade/score badges -->
+        <h2 class="h4 mt-5">Grade badges</h2>
+        <p class="small text-body-secondary">
+          Scores 0–100 map onto letter grades (A–F) and badge colors via two separate
+          scales. The color scale is coarser than the grade scale: only 3 colors regardless
+          of the 5-letter range. Use this mapping consistently across all sites.
+        </p>
+        <table class="table table-sm small mb-3">
+          <caption class="visually-hidden">Score-to-grade-to-color mapping</caption>
+          <thead>
+            <tr>
+              <th scope="col">Score</th>
+              <th scope="col">Grade</th>
+              <th scope="col">Badge color</th>
+              <th scope="col">Example</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>90–100</td>
+              <td>A</td>
+              <td><code>text-bg-success</code></td>
+              <td><span class="badge text-bg-success">A</span></td>
+            </tr>
+            <tr>
+              <td>80–89</td>
+              <td>B</td>
+              <td><code>text-bg-warning</code></td>
+              <td><span class="badge text-bg-warning">B</span></td>
+            </tr>
+            <tr>
+              <td>70–79</td>
+              <td>C</td>
+              <td><code>text-bg-warning</code></td>
+              <td><span class="badge text-bg-warning">C</span></td>
+            </tr>
+            <tr>
+              <td>60–69</td>
+              <td>D</td>
+              <td><code>text-bg-danger</code></td>
+              <td><span class="badge text-bg-danger">D</span></td>
+            </tr>
+            <tr>
+              <td>0–59</td>
+              <td>F</td>
+              <td><code>text-bg-danger</code></td>
+              <td><span class="badge text-bg-danger">F</span></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Status badges -->
+        <h2 class="h4 mt-5">Status badges</h2>
+        <p class="small text-body-secondary">
+          Use the same color tokens for non-grade status indicators (pass/fail, active/inactive, etc.).
+          The same WCAG-verified colors apply.
+        </p>
+        <div class="d-flex gap-2 flex-wrap mb-3">
+          <span class="badge text-bg-success">Pass</span>
+          <span class="badge text-bg-warning">Partial</span>
+          <span class="badge text-bg-danger">Fail</span>
+          <span class="badge text-bg-primary">Active</span>
+          <span class="badge text-bg-secondary">Inactive</span>
+        </div>
+
+        <!-- Markup -->
+        <h2 class="h4 mt-5">Markup</h2>
+        <pre class="border rounded p-3 small"><code>&lt;span class="badge text-bg-success"&gt;A&lt;/span&gt;
+&lt;span class="badge text-bg-warning"&gt;C&lt;/span&gt;
+&lt;span class="badge text-bg-danger"&gt;F&lt;/span&gt;
+&lt;span class="badge text-bg-primary"&gt;Active&lt;/span&gt;</code></pre>
+
+        <!-- Status icons -->
+        <h2 class="h4 mt-5">Status icons</h2>
+        <p class="small text-body-secondary">
+          For inline pass/fail indicators within a table cell or text, use Font Awesome
+          circle icons with text color utilities instead of a badge — these are inline,
+          not block-level elements. Used in the rankings Status column and compliance tables.
+          <code>fa-circle-check text-success</code>,
+          <code>fa-circle-xmark text-danger</code>, and
+          <code>fa-circle-exclamation text-warning</code> (for inaccessible/unknown state).
+        </p>
+        <div class="d-flex gap-3 align-items-center mb-3">
+          <span>
+            <i class="fa-solid fa-circle-check text-success" aria-hidden="true"></i>
+            <span class="small ms-1">Pass</span>
+          </span>
+          <span>
+            <i class="fa-solid fa-circle-xmark text-danger" aria-hidden="true"></i>
+            <span class="small ms-1">Fail</span>
+          </span>
+          <span>
+            <i class="fa-solid fa-circle-exclamation text-warning" aria-hidden="true"></i>
+            <span class="small ms-1">Unknown</span>
+          </span>
+        </div>
+        <pre class="border rounded p-3 small mb-5"><code>&lt;i class="fa-solid fa-circle-check text-success" aria-hidden="true"&gt;&lt;/i&gt;
+&lt;i class="fa-solid fa-circle-xmark text-danger" aria-hidden="true"&gt;&lt;/i&gt;
+&lt;i class="fa-solid fa-circle-exclamation text-warning" aria-hidden="true"&gt;&lt;/i&gt;</code></pre>
+
+        <!-- WCAG color reference -->
+        <h2 class="h4 mt-5">Color reference</h2>
+        <p class="small text-body-secondary">
+          These are the actual hex values <code>scangov.css</code> injects for the three status colors.
+          All pass WCAG 2.2 AA contrast (ratios in comments in the CSS).
+        </p>
+        <table class="table table-sm small">
+          <caption class="visually-hidden">Hex values for status badge colors</caption>
+          <thead>
+            <tr>
+              <th scope="col">Class</th>
+              <th scope="col">Background</th>
+              <th scope="col">Text</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>text-bg-success</code></td>
+              <td><code>#70e17b</code></td>
+              <td><code>#13171f</code></td>
+            </tr>
+            <tr>
+              <td><code>text-bg-warning</code></td>
+              <td><code>#face00</code></td>
+              <td><code>#000000</code></td>
+            </tr>
+            <tr>
+              <td><code>text-bg-danger</code></td>
+              <td><code>#e41d3d</code></td>
+              <td><code>#ffffff</code></td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+  </div>
+</main>
+
+</body>
+</html>

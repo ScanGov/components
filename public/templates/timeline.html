@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Timeline – ScanGov components</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="../css/scangov.css">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-md border-bottom">
+  <div class="container-fluid">
+    <a class="navbar-brand small" href="index.html">
+      <i class="fa-solid fa-bars-progress me-1" aria-hidden="true"></i>
+      ScanGov
+    </a>
+  </div>
+</nav>
+
+<main id="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 col-md-10 col-lg-8 py-3">
+
+        <h1 class="display-6">Timeline</h1>
+        <p class="text-body-secondary">
+          A custom <code>scangov.css</code> component — not part of Bootstrap.
+          Uses a left-border line with dot markers (<code>:after</code> pseudo-element)
+          to connect a vertical sequence of steps. Each step is a card with a two-column
+          interior: icon column (<code>.col-auto</code>, min-width 4rem) and content column
+          (<code>.col.border-start</code>). The last item should omit <code>.pb-3</code>
+          to avoid extra space below the final dot.
+        </p>
+
+        <!-- Standard timeline -->
+        <h2 class="h4 mt-5">Step timeline</h2>
+        <p class="small text-body-secondary">
+          Used for process flows like "How it works." Constrain width with
+          <code>col-md-8</code> or similar — full-width timelines look too spread out.
+        </p>
+        <div class="row justify-content-center mb-4">
+          <div class="col-12 col-md-8">
+            <ul class="timeline mb-0">
+              <li class="timeline-item pb-3">
+                <div class="card">
+                  <div class="row g-0 align-items-center">
+                    <div class="col-auto p-3 text-center">
+                      <i class="fa-solid fa-bars-progress fa-2x" aria-hidden="true"></i>
+                    </div>
+                    <div class="col border-start p-3">
+                      <h3 class="h5 mb-1">Scan</h3>
+                      <p class="small text-body-secondary mb-0">We fully scan your website.</p>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="timeline-item pb-3">
+                <div class="card">
+                  <div class="row g-0 align-items-center">
+                    <div class="col-auto p-3 text-center">
+                      <i class="fa-solid fa-list-check fa-2x" aria-hidden="true"></i>
+                    </div>
+                    <div class="col border-start p-3">
+                      <h3 class="h5 mb-1">Tasks</h3>
+                      <p class="small text-body-secondary mb-0">We create a prioritized tasklist of items to fix.</p>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="timeline-item pb-3">
+                <div class="card">
+                  <div class="row g-0 align-items-center">
+                    <div class="col-auto p-3 text-center">
+                      <i class="fa-solid fa-screwdriver-wrench fa-2x" aria-hidden="true"></i>
+                    </div>
+                    <div class="col border-start p-3">
+                      <h3 class="h5 mb-1">Fix</h3>
+                      <p class="small text-body-secondary mb-0">Fix issues with your team, agency, or vendor.</p>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="timeline-item">
+                <div class="card">
+                  <div class="row g-0 align-items-center">
+                    <div class="col-auto p-3 text-center">
+                      <i class="fa-solid fa-eye fa-2x" aria-hidden="true"></i>
+                    </div>
+                    <div class="col border-start p-3">
+                      <h3 class="h5 mb-1">Monitor</h3>
+                      <p class="small text-body-secondary mb-0">We continuously monitor for new issues.</p>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <pre class="border rounded p-3 small mb-5"><code>&lt;ul class="timeline mb-0"&gt;
+  &lt;li class="timeline-item pb-3"&gt;
+    &lt;div class="card"&gt;
+      &lt;div class="row g-0 align-items-center"&gt;
+        &lt;div class="col-auto p-3 text-center"&gt;
+          &lt;i class="fa-solid fa-bars-progress fa-2x" aria-hidden="true"&gt;&lt;/i&gt;
+        &lt;/div&gt;
+        &lt;div class="col border-start p-3"&gt;
+          &lt;h3 class="h5 mb-1"&gt;Step title&lt;/h3&gt;
+          &lt;p class="small text-body-secondary mb-0"&gt;Step description.&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;!-- Last item: omit pb-3 --&gt;
+  &lt;li class="timeline-item"&gt;...&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+
+        <!-- Domain changelog variant -->
+        <h2 class="h4 mt-5">Changelog variant</h2>
+        <p class="small text-body-secondary">
+          For scan history or changelog entries use <code>.timeline-domain</code> and
+          <code>.timeline-date</code> helper classes (both defined in <code>scangov.css</code>).
+          No card wrapper needed — simpler list item content.
+        </p>
+        <div class="row justify-content-center mb-4">
+          <div class="col-12 col-md-8">
+            <ul class="timeline mb-0">
+              <li class="timeline-item pb-3">
+                <p class="timeline-domain mb-0">iowa.gov</p>
+                <p class="timeline-date mb-0">June 30, 2026</p>
+                <p class="small text-body-secondary mb-0">Accessibility score improved from C to A.</p>
+              </li>
+              <li class="timeline-item pb-3">
+                <p class="timeline-domain mb-0">hiv.gov</p>
+                <p class="timeline-date mb-0">June 28, 2026</p>
+                <p class="small text-body-secondary mb-0">Security scan completed. 3 new issues found.</p>
+              </li>
+              <li class="timeline-item">
+                <p class="timeline-domain mb-0">example.gov</p>
+                <p class="timeline-date mb-0">June 25, 2026</p>
+                <p class="small text-body-secondary mb-0">Site added to monitoring.</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <pre class="border rounded p-3 small"><code>&lt;ul class="timeline mb-0"&gt;
+  &lt;li class="timeline-item pb-3"&gt;
+    &lt;p class="timeline-domain mb-0"&gt;domain.gov&lt;/p&gt;
+    &lt;p class="timeline-date mb-0"&gt;June 30, 2026&lt;/p&gt;
+    &lt;p class="small text-body-secondary mb-0"&gt;Change description.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+
+      </div>
+    </div>
+  </div>
+</main>
+
+</body>
+</html>

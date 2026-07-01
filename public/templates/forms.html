@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Forms – ScanGov components</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="../css/scangov.css">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-md border-bottom">
+  <div class="container-fluid">
+    <a class="navbar-brand small" href="index.html">
+      <i class="fa-solid fa-bars-progress me-1" aria-hidden="true"></i>
+      ScanGov
+    </a>
+  </div>
+</nav>
+
+<main id="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 col-md-10 col-lg-8 py-3">
+
+        <h1 class="display-6">Forms</h1>
+        <p class="text-body-secondary">
+          Standard Bootstrap 5 form classes apply throughout. <code>scangov.css</code> adds
+          minor hover/focus enhancements to <code>.form-control</code> — no extra classes needed
+          for that. Always pair inputs with <code>&lt;label&gt;</code> elements using matching
+          <code>for</code>/<code>id</code> attributes.
+        </p>
+
+        <!-- Text inputs -->
+        <h2 class="h4 mt-5">Text inputs</h2>
+        <p class="small text-body-secondary">
+          Use <code>.form-control</code> for text, email, password, and textarea inputs.
+          Wrap each input and label in <code>.mb-3</code> for consistent spacing.
+        </p>
+        <form class="mb-4" novalidate>
+          <div class="mb-3">
+            <label for="input-email" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="input-email" placeholder="name@agency.gov">
+          </div>
+          <div class="mb-3">
+            <label for="input-password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="input-password">
+          </div>
+          <div class="mb-3">
+            <label for="input-textarea" class="form-label">Notes</label>
+            <textarea class="form-control" id="input-textarea" rows="3"></textarea>
+          </div>
+        </form>
+        <pre class="border rounded p-3 small mb-5"><code>&lt;div class="mb-3"&gt;
+  &lt;label for="input-email" class="form-label"&gt;Email address&lt;/label&gt;
+  &lt;input type="email" class="form-control" id="input-email"&gt;
+&lt;/div&gt;</code></pre>
+
+        <!-- Search -->
+        <h2 class="h4 mt-5">Search</h2>
+        <p class="small text-body-secondary">
+          Add <code>shadow</code> to the search input — this is the established pattern
+          across ScanGov sites. Use with a <code>&lt;datalist&gt;</code> for autocomplete
+          or connect to a search handler via JS.
+        </p>
+        <div class="mb-3 col-12 col-md-6">
+          <label for="input-search" class="form-label visually-hidden">Search</label>
+          <input type="search" class="form-control shadow" id="input-search" placeholder="Search sites…" aria-label="Search">
+        </div>
+        <pre class="border rounded p-3 small mb-5"><code>&lt;input type="search" class="form-control shadow" id="search"
+  placeholder="Search…" aria-label="Search"&gt;</code></pre>
+
+        <!-- Select -->
+        <h2 class="h4 mt-5">Select</h2>
+        <p class="small text-body-secondary">
+          Use <code>.form-select</code> for dropdowns.
+        </p>
+        <div class="mb-3 col-12 col-md-6">
+          <label for="input-select" class="form-label">Indicator</label>
+          <select class="form-select" id="input-select">
+            <option selected>All indicators</option>
+            <option>Accessibility</option>
+            <option>Botability</option>
+            <option>Security</option>
+            <option>Usability</option>
+          </select>
+        </div>
+        <pre class="border rounded p-3 small mb-5"><code>&lt;label for="input-select" class="form-label"&gt;Indicator&lt;/label&gt;
+&lt;select class="form-select" id="input-select"&gt;
+  &lt;option selected&gt;All indicators&lt;/option&gt;
+  &lt;option&gt;Accessibility&lt;/option&gt;
+&lt;/select&gt;</code></pre>
+
+        <!-- Checkboxes -->
+        <h2 class="h4 mt-5">Checkboxes</h2>
+        <p class="small text-body-secondary">
+          Use <code>.form-check</code> wrappers with <code>.form-check-input</code> and
+          <code>.form-check-label</code>. Each checkbox needs its own unique <code>id</code>.
+        </p>
+        <div class="mb-4">
+          <div class="form-check mb-2">
+            <input class="form-check-input" type="checkbox" id="check-1" checked>
+            <label class="form-check-label" for="check-1">iowa.gov</label>
+          </div>
+          <div class="form-check mb-2">
+            <input class="form-check-input" type="checkbox" id="check-2">
+            <label class="form-check-label" for="check-2">hiv.gov</label>
+          </div>
+          <div class="form-check mb-2">
+            <input class="form-check-input" type="checkbox" id="check-3" disabled>
+            <label class="form-check-label" for="check-3">example.gov (disabled)</label>
+          </div>
+        </div>
+        <pre class="border rounded p-3 small mb-5"><code>&lt;div class="form-check mb-2"&gt;
+  &lt;input class="form-check-input" type="checkbox" id="check-1"&gt;
+  &lt;label class="form-check-label" for="check-1"&gt;Label&lt;/label&gt;
+&lt;/div&gt;</code></pre>
+
+        <!-- File upload -->
+        <h2 class="h4 mt-5">File upload</h2>
+        <div class="mb-3 col-12 col-md-6">
+          <label for="input-file" class="form-label">Upload domain list</label>
+          <input class="form-control" type="file" id="input-file" accept=".csv,.txt">
+        </div>
+        <pre class="border rounded p-3 small mb-5"><code>&lt;label for="input-file" class="form-label"&gt;Upload domain list&lt;/label&gt;
+&lt;input class="form-control" type="file" id="input-file" accept=".csv,.txt"&gt;</code></pre>
+
+        <!-- Validation states -->
+        <h2 class="h4 mt-5">Validation states</h2>
+        <p class="small text-body-secondary">
+          Use Bootstrap's <code>.is-valid</code> / <code>.is-invalid</code> on the input
+          and a sibling <code>.valid-feedback</code> / <code>.invalid-feedback</code> element.
+          Add <code>novalidate</code> on the form to manage validation via JS.
+        </p>
+        <form class="mb-4" novalidate>
+          <div class="mb-3">
+            <label for="input-valid" class="form-label">Domain (valid)</label>
+            <input type="text" class="form-control is-valid" id="input-valid" value="iowa.gov">
+            <div class="valid-feedback">Looks good.</div>
+          </div>
+          <div class="mb-3">
+            <label for="input-invalid" class="form-label">Domain (invalid)</label>
+            <input type="text" class="form-control is-invalid" id="input-invalid" value="not a domain">
+            <div class="invalid-feedback">Enter a valid domain, e.g. <code>agency.gov</code>.</div>
+          </div>
+        </form>
+        <pre class="border rounded p-3 small"><code>&lt;input type="text" class="form-control is-valid" id="..."&gt;
+&lt;div class="valid-feedback"&gt;Looks good.&lt;/div&gt;
+
+&lt;input type="text" class="form-control is-invalid" id="..."&gt;
+&lt;div class="invalid-feedback"&gt;Error message.&lt;/div&gt;</code></pre>
+
+      </div>
+    </div>
+  </div>
+</main>
+
+</body>
+</html>

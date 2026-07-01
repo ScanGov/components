@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cards – ScanGov components</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="../css/scangov.css">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-md border-bottom">
+  <div class="container-fluid">
+    <a class="navbar-brand small" href="index.html">
+      <i class="fa-solid fa-bars-progress me-1" aria-hidden="true"></i>
+      ScanGov
+    </a>
+  </div>
+</nav>
+
+<main id="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 col-md-10 col-lg-8 py-3">
+
+        <h1 class="display-6">Cards</h1>
+        <p class="text-body-secondary">
+          <code>scangov.css</code> adds border, shadow, hover-brightness, and focus-ring
+          to every <code>.card</code> automatically — don't add these manually.
+          Status-variant cards and link cards (stretched-link) have additional automatic behavior
+          documented below.
+        </p>
+
+        <!-- Standard card -->
+        <h2 class="h4 mt-5">Standard</h2>
+        <p class="small text-body-secondary">
+          A plain <code>.card</code> gets border, shadow, and a brightness hover effect automatically.
+          No extra classes needed for that base styling.
+        </p>
+        <div class="row g-3 mb-4">
+          <div class="col-12 col-md-4">
+            <div class="card">
+              <div class="card-body">
+                <h3 class="h5">Card title</h3>
+                <p class="card-text small text-body-secondary">Supporting detail or description goes here.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-4">
+            <div class="card">
+              <div class="card-body">
+                <i class="fa-solid fa-gauge-high fa-lg d-block mb-2" aria-hidden="true"></i>
+                <h3 class="h5 mt-3">Card with icon</h3>
+                <p class="card-text small text-body-secondary">Icon sits above the heading inside card-body.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stretched-link card grid -->
+        <h2 class="h4 mt-5">Link cards (stretched-link)</h2>
+        <p class="small text-body-secondary">
+          Adding a <code>.stretched-link</code> anchor inside a card triggers an automatic
+          blue-tinted border and a distinct hover effect via the <code>:has()</code> selector
+          in <code>scangov.css</code> — no extra class needed. The entire card becomes the
+          click target.
+        </p>
+        <div class="row g-3 mb-4">
+          <div class="col-12 col-md-4 d-flex align-items-stretch">
+            <div class="card">
+              <div class="card-body">
+                <i class="fa-solid fa-universal-access fa-lg d-block mb-2" aria-hidden="true"></i>
+                <h3 class="h5 mt-3"><a href="#" class="stretched-link">Accessibility</a></h3>
+                <p class="card-text small text-body-secondary">Multi-site management.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-4 d-flex align-items-stretch">
+            <div class="card">
+              <div class="card-body">
+                <i class="fa-solid fa-shield-halved fa-lg d-block mb-2" aria-hidden="true"></i>
+                <h3 class="h5 mt-3"><a href="#" class="stretched-link">Security</a></h3>
+                <p class="card-text small text-body-secondary">Status by indicator.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-4 d-flex align-items-stretch">
+            <div class="card">
+              <div class="card-body">
+                <i class="fa-solid fa-robot fa-lg d-block mb-2" aria-hidden="true"></i>
+                <h3 class="h5 mt-3"><a href="#" class="stretched-link">Botability</a></h3>
+                <p class="card-text small text-body-secondary">Top-level overview.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Status variant cards -->
+        <h2 class="h4 mt-5">Status cards</h2>
+        <p class="small text-body-secondary">
+          Add <code>text-bg-success</code>, <code>text-bg-warning</code>, or <code>text-bg-danger</code>
+          to a <code>.card</code> to apply the WCAG-verified status colors (same as badge colors).
+          The <code>.card-header</code> automatically gets a semi-transparent white overlay.
+          Icons and links inside status cards inherit the card's text color automatically.
+          These cards do NOT get the standard hover-brightness effect — they have their own hover treatment.
+        </p>
+        <div class="row g-3 mb-4">
+          <div class="col-12 col-md-4">
+            <div class="card text-bg-success">
+              <div class="card-header">iowa.gov</div>
+              <div class="card-body text-center">
+                <div class="display-4">A</div>
+                <div class="small">95 / 100</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-4">
+            <div class="card text-bg-warning">
+              <div class="card-header">hiv.gov</div>
+              <div class="card-body text-center">
+                <div class="display-4">C</div>
+                <div class="small">72 / 100</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-4">
+            <div class="card text-bg-danger">
+              <div class="card-header">example.gov</div>
+              <div class="card-body text-center">
+                <div class="display-4">F</div>
+                <div class="small">42 / 100</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Markup -->
+        <h2 class="h4 mt-5">Markup</h2>
+        <pre class="border rounded p-3 small"><code>&lt;!-- Standard --&gt;
+&lt;div class="card"&gt;
+  &lt;div class="card-body"&gt;...&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Link card (stretched-link) --&gt;
+&lt;div class="card"&gt;
+  &lt;div class="card-body"&gt;
+    &lt;h3&gt;&lt;a href="/..." class="stretched-link"&gt;Title&lt;/a&gt;&lt;/h3&gt;
+    &lt;p class="card-text small"&gt;Description&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Status card --&gt;
+&lt;div class="card text-bg-success"&gt;
+  &lt;div class="card-header"&gt;domain.gov&lt;/div&gt;
+  &lt;div class="card-body text-center"&gt;
+    &lt;div class="display-4"&gt;A&lt;/div&gt;
+    &lt;div class="small"&gt;95 / 100&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+      </div>
+    </div>
+  </div>
+</main>
+
+</body>
+</html>
