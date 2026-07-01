@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Breadcrumbs – ScanGov components</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="../css/scangov.css">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-md border-bottom">
+  <div class="container-fluid">
+    <a class="navbar-brand small" href="index.html">
+      <i class="fa-solid fa-bars-progress me-1" aria-hidden="true"></i>
+      ScanGov
+    </a>
+  </div>
+</nav>
+
+<main id="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 col-md-10 col-lg-8 py-3">
+
+        <h1 class="display-6">Breadcrumbs</h1>
+        <p class="text-body-secondary">
+          Two distinct breadcrumb patterns are in use across ScanGov sites — choose based on
+          context, not preference. Both live in <code>components/_includes/</code>.
+        </p>
+
+        <!-- Default breadcrumb -->
+        <h2 class="h4 mt-5">Default breadcrumb</h2>
+        <p class="small text-body-secondary">
+          Use for standard page-level navigation (docs, standards, features, any non-profile page).
+          Uses Bootstrap's standard <code>.breadcrumb</code> with <code>.breadcrumb-default</code>
+          and <code>.font-monospace</code> styling. Source: <code>_includes/breadcrumb-default.html</code>.
+        </p>
+        <nav aria-label="Breadcrumb" class="breadcrumb-default mb-3">
+          <ol class="breadcrumb small font-monospace">
+            <li class="breadcrumb-item"><a href="#">Features</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Sites dashboard</li>
+          </ol>
+        </nav>
+        <pre class="border rounded p-3 small"><code>&lt;nav aria-label="Breadcrumb" class="breadcrumb-default mb-3"&gt;
+  &lt;ol class="breadcrumb small font-monospace"&gt;
+    &lt;li class="breadcrumb-item"&gt;&lt;a href="/parent/"&gt;Parent&lt;/a&gt;&lt;/li&gt;
+    &lt;li class="breadcrumb-item active" aria-current="page"&gt;Current page&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/nav&gt;</code></pre>
+
+        <!-- Profile breadcrumb -->
+        <h2 class="h4 mt-5">Profile breadcrumb</h2>
+        <p class="small text-body-secondary">
+          Use for the org&nbsp;&rarr;&nbsp;domain hierarchy in the site-monitoring context.
+          Custom classes <code>.bc-org</code>, <code>.bc-domain</code>, and <code>.bc-sep</code>
+          give the separator and each link type distinct theme-aware colors (defined in
+          <code>scangov.css</code>, lines ~535–590). A single <code>&lt;li&gt;</code> holds
+          the full path — don't nest multiple <code>&lt;li&gt;</code> elements.
+          Source: <code>_includes/breadcrumb-profile.html</code>.
+        </p>
+
+        <nav aria-label="breadcrumb" class="fs-5 font-monospace mb-3">
+          <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item">
+              <i class="fa-solid fa-hand-point-right" aria-hidden="true"></i>
+              <a href="#" class="bc-org">State of Iowa</a><span class="bc-sep"> / </span><a href="#" class="bc-domain">iowa.gov</a>
+            </li>
+          </ol>
+        </nav>
+        <pre class="border rounded p-3 small"><code>&lt;nav aria-label="breadcrumb" class="fs-5 font-monospace"&gt;
+  &lt;ol class="breadcrumb mb-0"&gt;
+    &lt;li class="breadcrumb-item"&gt;
+      &lt;i class="fa-solid fa-hand-point-right" aria-hidden="true"&gt;&lt;/i&gt;
+      &lt;a href="/org/org-name/" class="bc-org"&gt;Org Name&lt;/a&gt;
+      &lt;span class="bc-sep"&gt; / &lt;/span&gt;
+      &lt;a href="/profile/domain-gov/overall/" class="bc-domain"&gt;domain.gov&lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/nav&gt;</code></pre>
+
+        <!-- Org-only variant -->
+        <h2 class="h4 mt-5">Profile breadcrumb — org current</h2>
+        <p class="small text-body-secondary">
+          When the org itself is the current page (not a specific domain), use
+          <code>.bc-org-current</code> on the org link instead of <code>.bc-org</code>
+          and omit the separator and domain link.
+        </p>
+        <nav aria-label="breadcrumb" class="fs-5 font-monospace mb-3">
+          <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item" aria-current="page">
+              <i class="fa-solid fa-hand-point-right" aria-hidden="true"></i>
+              <a href="#" class="bc-org-current">State of Iowa</a>
+            </li>
+          </ol>
+        </nav>
+        <pre class="border rounded p-3 small"><code>&lt;li class="breadcrumb-item" aria-current="page"&gt;
+  &lt;i class="fa-solid fa-hand-point-right" aria-hidden="true"&gt;&lt;/i&gt;
+  &lt;a href="/org/org-name/" class="bc-org-current"&gt;Org Name&lt;/a&gt;
+&lt;/li&gt;</code></pre>
+
+      </div>
+    </div>
+  </div>
+</main>
+
+</body>
+</html>

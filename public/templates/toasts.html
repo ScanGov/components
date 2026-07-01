@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Toasts &amp; loading – ScanGov components</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="../css/scangov.css">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-md border-bottom">
+  <div class="container-fluid">
+    <a class="navbar-brand small" href="index.html">
+      <i class="fa-solid fa-bars-progress me-1" aria-hidden="true"></i>
+      ScanGov
+    </a>
+  </div>
+</nav>
+
+<main id="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 col-md-10 col-lg-8 py-3">
+
+        <h1 class="display-6">Toasts &amp; loading</h1>
+        <p class="text-body-secondary">
+          Patterns for communicating in-progress and completed actions to users.
+          All use proper ARIA attributes so screen readers announce them without focus movement.
+        </p>
+
+        <!-- Spinner -->
+        <h2 class="h4 mt-5">Spinner (block)</h2>
+        <p class="small text-body-secondary">
+          Use <code>.spinner-border</code> with <code>role="status"</code> and a
+          <code>.visually-hidden</code> label for screen readers. Pair with
+          <code>aria-busy="true"</code> on the loading container when replacing content.
+        </p>
+        <div class="mb-3 d-flex gap-3 align-items-center">
+          <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading…</span>
+          </div>
+          <div class="spinner-border spinner-border-sm" role="status">
+            <span class="visually-hidden">Loading…</span>
+          </div>
+        </div>
+        <pre class="border rounded p-3 small mb-5"><code>&lt;div class="spinner-border" role="status"&gt;
+  &lt;span class="visually-hidden"&gt;Loading…&lt;/span&gt;
+&lt;/div&gt;
+
+&lt;!-- Small variant --&gt;
+&lt;div class="spinner-border spinner-border-sm" role="status"&gt;
+  &lt;span class="visually-hidden"&gt;Loading…&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+
+        <!-- Icon spin (inline) -->
+        <h2 class="h4 mt-5">Icon spin (inline / button)</h2>
+        <p class="small text-body-secondary">
+          For buttons that trigger an async action, swap the button's icon to a spinning
+          <code>fa-spinner fa-spin</code> while the action is pending. Restore the original
+          icon on completion. Don't disable the button unless necessary — prefer visual
+          feedback only.
+        </p>
+        <div class="mb-3 d-flex gap-3 align-items-center">
+          <button class="btn btn-primary" disabled>
+            <i class="fa-solid fa-spinner fa-spin me-2" aria-hidden="true"></i>Scanning…
+          </button>
+          <button class="btn btn-primary">
+            <i class="fa-solid fa-rotate-right me-2" aria-hidden="true"></i>Re-scan
+          </button>
+        </div>
+        <pre class="border rounded p-3 small mb-5"><code>&lt;!-- Pending state --&gt;
+&lt;button class="btn btn-primary" disabled&gt;
+  &lt;i class="fa-solid fa-spinner fa-spin me-2" aria-hidden="true"&gt;&lt;/i&gt;Scanning…
+&lt;/button&gt;
+
+&lt;!-- Idle state --&gt;
+&lt;button class="btn btn-primary"&gt;
+  &lt;i class="fa-solid fa-rotate-right me-2" aria-hidden="true"&gt;&lt;/i&gt;Re-scan
+&lt;/button&gt;</code></pre>
+
+        <!-- Toast notifications -->
+        <h2 class="h4 mt-5">Toast notifications</h2>
+        <p class="small text-body-secondary">
+          Use Bootstrap's <code>.toast</code> component for non-blocking status messages.
+          Always include <code>role="alert" aria-live="assertive" aria-atomic="true"</code>
+          so screen readers announce the message immediately. Position with
+          <code>.position-fixed .bottom-0 .end-0</code> for the standard bottom-right placement.
+          Auto-dismiss after 5 seconds via <code>data-bs-delay="5000" data-bs-autohide="true"</code>.
+        </p>
+        <div class="position-relative" style="height: 120px;">
+          <div class="toast show position-absolute bottom-0 end-0 m-3"
+               role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+              <i class="fa-solid fa-circle-check text-success me-2" aria-hidden="true"></i>
+              <strong class="me-auto">Done</strong>
+              <button type="button" class="btn-close" aria-label="Close"></button>
+            </div>
+            <div class="toast-body small">
+              Scan complete for iowa.gov.
+            </div>
+          </div>
+        </div>
+        <div class="position-relative mb-4" style="height: 120px;">
+          <div class="toast show position-absolute bottom-0 end-0 m-3"
+               role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+              <i class="fa-solid fa-circle-xmark text-danger me-2" aria-hidden="true"></i>
+              <strong class="me-auto">Error</strong>
+              <button type="button" class="btn-close" aria-label="Close"></button>
+            </div>
+            <div class="toast-body small">
+              Could not reach iowa.gov. Try again.
+            </div>
+          </div>
+        </div>
+        <pre class="border rounded p-3 small"><code>&lt;!-- Mount inside a .position-fixed.bottom-0.end-0.p-3 container --&gt;
+&lt;div class="toast" role="alert" aria-live="assertive" aria-atomic="true"
+     data-bs-autohide="true" data-bs-delay="5000"&gt;
+  &lt;div class="toast-header"&gt;
+    &lt;i class="fa-solid fa-circle-check text-success me-2" aria-hidden="true"&gt;&lt;/i&gt;
+    &lt;strong class="me-auto"&gt;Done&lt;/strong&gt;
+    &lt;button type="button" class="btn-close" aria-label="Close"&gt;&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div class="toast-body small"&gt;Scan complete for domain.gov.&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+// Initialize and show
+const el = document.querySelector('.toast');
+const toast = new bootstrap.Toast(el);
+toast.show();
+&lt;/script&gt;</code></pre>
+
+      </div>
+    </div>
+  </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
