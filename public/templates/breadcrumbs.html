@@ -60,44 +60,79 @@
           the full path — don't nest multiple <code>&lt;li&gt;</code> elements.
           Source: <code>_includes/breadcrumb-profile.html</code>.
         </p>
-
-        <nav aria-label="breadcrumb" class="fs-5 font-monospace mb-3">
-          <ol class="breadcrumb mb-0">
-            <li class="breadcrumb-item">
-              <i class="fa-solid fa-hand-point-right" aria-hidden="true"></i>
-              <a href="#" class="bc-org">State of Iowa</a><span class="bc-sep"> / </span><a href="#" class="bc-domain">iowa.gov</a>
-            </li>
-          </ol>
-        </nav>
-        <pre class="border rounded p-3 small"><code>&lt;nav aria-label="breadcrumb" class="fs-5 font-monospace"&gt;
-  &lt;ol class="breadcrumb mb-0"&gt;
-    &lt;li class="breadcrumb-item"&gt;
-      &lt;i class="fa-solid fa-hand-point-right" aria-hidden="true"&gt;&lt;/i&gt;
-      &lt;a href="/org/org-name/" class="bc-org"&gt;Org Name&lt;/a&gt;
-      &lt;span class="bc-sep"&gt; / &lt;/span&gt;
-      &lt;a href="/profile/domain-gov/overall/" class="bc-domain"&gt;domain.gov&lt;/a&gt;
-    &lt;/li&gt;
-  &lt;/ol&gt;
-&lt;/nav&gt;</code></pre>
-
-        <!-- Org-only variant -->
-        <h2 class="h4 mt-5">Profile breadcrumb — org current</h2>
         <p class="small text-body-secondary">
-          When the org itself is the current page (not a specific domain), use
-          <code>.bc-org-current</code> on the org link instead of <code>.bc-org</code>
-          and omit the separator and domain link.
+          <strong>Placement</strong> — render as a direct child of <code>&lt;main&gt;</code>,
+          before the page content container. Never nest inside another <code>container</code>
+          or <code>container-fluid</code>.
         </p>
-        <nav aria-label="breadcrumb" class="fs-5 font-monospace mb-3">
-          <ol class="breadcrumb mb-0">
-            <li class="breadcrumb-item" aria-current="page">
-              <i class="fa-solid fa-hand-point-right" aria-hidden="true"></i>
-              <a href="#" class="bc-org-current">State of Iowa</a>
-            </li>
-          </ol>
-        </nav>
-        <pre class="border rounded p-3 small"><code>&lt;li class="breadcrumb-item" aria-current="page"&gt;
+        <p class="small text-body-secondary">
+          <strong>Standard container wrapper</strong> — always wrap with this structure so padding and
+          alignment are consistent across all pages:
+        </p>
+        <pre class="border rounded p-3 small mb-3"><code>&lt;div class="container-fluid"&gt;
+  &lt;div class="row"&gt;
+    &lt;div class="col-12 py-3"&gt;
+      &lt;!-- breadcrumb here --&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+        <div class="container-fluid border rounded mb-3">
+          <div class="row">
+            <div class="col-12 py-3">
+              <nav aria-label="breadcrumb" class="fs-5 font-monospace">
+                <ol class="breadcrumb mb-0">
+                  <li class="breadcrumb-item">
+                    <i class="fa-solid fa-hand-point-right" aria-hidden="true"></i>
+                    <a href="#" class="bc-org">State of Iowa</a><span class="bc-sep"> / </span><a href="#" class="bc-domain">iowa.gov</a>
+                  </li>
+                </ol>
+              </nav>
+            </div>
+          </div>
+        </div>
+        <pre class="border rounded p-3 small"><code>&lt;div class="container-fluid"&gt;
+  &lt;div class="row"&gt;
+    &lt;div class="col-12 py-3"&gt;
+      &lt;nav aria-label="breadcrumb" class="fs-5 font-monospace"&gt;
+        &lt;ol class="breadcrumb mb-0"&gt;
+          &lt;li class="breadcrumb-item"&gt;
+            &lt;i class="fa-solid fa-hand-point-right" aria-hidden="true"&gt;&lt;/i&gt;
+            &lt;a href="/org/org-name/" class="bc-org"&gt;Org Name&lt;/a&gt;
+            &lt;span class="bc-sep"&gt; / &lt;/span&gt;
+            &lt;a href="/profile/domain-gov/overall/" class="bc-domain"&gt;domain.gov&lt;/a&gt;
+          &lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/nav&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+        <!-- Org section variant -->
+        <h2 class="h4 mt-5">Profile breadcrumb — org section</h2>
+        <p class="small text-body-secondary">
+          On org-level pages (settings, people, plans, etc.), the breadcrumb shows only
+          <strong>Org</strong> as a <code>.bc-domain</code> link to <code>/organization</code>.
+          Do not pass an <code>organization</code> prop to the layout — the org name prefix is
+          omitted intentionally so the breadcrumb stays concise.
+        </p>
+        <div class="container-fluid border rounded mb-3">
+          <div class="row">
+            <div class="col-12 py-3">
+              <nav aria-label="breadcrumb" class="fs-5 font-monospace">
+                <ol class="breadcrumb mb-0">
+                  <li class="breadcrumb-item">
+                    <i class="fa-solid fa-hand-point-right" aria-hidden="true"></i>
+                    <a href="/organization" class="bc-domain">Org</a>
+                  </li>
+                </ol>
+              </nav>
+            </div>
+          </div>
+        </div>
+        <pre class="border rounded p-3 small"><code>&lt;li class="breadcrumb-item"&gt;
   &lt;i class="fa-solid fa-hand-point-right" aria-hidden="true"&gt;&lt;/i&gt;
-  &lt;a href="/org/org-name/" class="bc-org-current"&gt;Org Name&lt;/a&gt;
+  &lt;a href="/organization" class="bc-domain"&gt;Org&lt;/a&gt;
 &lt;/li&gt;</code></pre>
 
       </div>
