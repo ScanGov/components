@@ -1,0 +1,48 @@
+<!--
+  Grade card components
+  Used on: my.scangov.com, scangov
+
+  CSS classes defined in public/css/scangov.css:
+    .card-grade     — big version (profile overview, public report, specific, report pages)
+    .card-grade-sm  — small/compact version (me page, sites page, orgs page)
+
+  Both versions rely on scangov.css for body padding and grade text size.
+  Do not add pt-5, pb-5, or text-center to .card-body — the CSS handles it.
+-->
+
+<!-- Big (default) — outer card is the link -->
+<a href="/profile/example/overview" class="card card-grade text-bg-success text-decoration-none">
+  <div class="card-header">Overall</div>
+  <div class="card-body">
+    <div class="display-1">A</div>
+  </div>
+</a>
+
+<!-- Big with optional footer -->
+<a href="/profile/example/overview" class="card card-grade text-bg-warning text-decoration-none">
+  <div class="card-header">Accessibility</div>
+  <div class="card-body">
+    <div class="display-1">B</div>
+  </div>
+  <div class="card-footer text-center">Score 82%</div>
+</a>
+
+<!-- Small — header link + body link (no footer) -->
+<div class="card card-grade-sm text-bg-success">
+  <div class="card-header">
+    <a href="/profile/example/overview" class="cardlink">example.gov</a>
+  </div>
+  <a href="/profile/example/overview" class="card-body text-decoration-none">
+    <div class="display-2">A</div>
+  </a>
+</div>
+
+<!-- Small — "Add new site" admin card (no color, no footer) -->
+<div class="card card-grade-sm">
+  <div class="card-header">
+    <a href="/scan" class="cardlink">Add new site</a>
+  </div>
+  <a href="/scan" class="card-body text-decoration-none">
+    <div class="display-2"><i class="fa-solid fa-plus"></i></div>
+  </a>
+</div>
