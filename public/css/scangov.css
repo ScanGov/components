@@ -1424,11 +1424,6 @@ a.card {
 
 /* Forms */
 
-form button[type="submit"],
-form input[type="submit"] {
-    margin-bottom: 2rem;
-}
-
 td form button[type="submit"],
 td form input[type="submit"] {
     margin-bottom: 0;
