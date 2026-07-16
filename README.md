@@ -33,6 +33,8 @@ Outputs `/sitemap.xml`. Includes all Eleventy collection pages except those with
 Requires in `site.json`:
 - `url` — site base URL
 
+**Pagination and `addAllPagesToCollections`:** `sitemap.xml` (and anything else that loops `collections.all` — search, a site index, RSS) only sees pages that are actually *in* `collections.all`. Eleventy's `pagination` feature only adds the first generated page to `collections.all` by default — any per-item pagination block (one page per person, domain, topic, dataset, etc., with its own `permalink:` referencing the pagination alias) must set `addAllPagesToCollections: true`, or every page after the first silently disappears from the sitemap with no build error. Reference example: `orgs/index.html` or `profile/overview.html` in the `scangov` repo. If pages are meant to stay out of collections on purpose, say so explicitly instead of just omitting the flag — `addAllPagesToCollections: false` (opts a per-item pagination page out specifically) or `eleventyExcludeFromCollections: true` (excludes a template from every collection outright, e.g. `redirects.njk`) — so a missing flag always reads as "forgotten," never "ambiguous." Each of the 5 deployed Eleventy sites also runs `scripts/check-sitemap-completeness.js` in CI to catch a forgotten flag automatically.
+
 ## Includes
 
 | File | Description |
