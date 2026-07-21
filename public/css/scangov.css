@@ -2160,6 +2160,22 @@ td a:hover .fa-circle-info {
     color: #a8f2ff;
 }
 
+.fa-file-arrow-down {
+    color: #a8f2ff;
+}
+
+.fa-file-csv {
+    color: #a8f2ff;
+}
+
+.fa-file-code {
+    color: #a8f2ff;
+}
+
+.fa-markdown {
+    color: #a8f2ff;
+}
+
 .fa-filter {
     color: #cbc4f2;
 }
@@ -2576,6 +2592,10 @@ a .fa-up-right-from-square {
 [data-bs-theme=light] .fa-envelope,
 [data-bs-theme=light] .fa-file,
 [data-bs-theme=light] .fa-file-lines,
+[data-bs-theme=light] .fa-file-arrow-down,
+[data-bs-theme=light] .fa-file-csv,
+[data-bs-theme=light] .fa-file-code,
+[data-bs-theme=light] .fa-markdown,
 [data-bs-theme=light] .fa-linkedin,
 [data-bs-theme=light] .fa-linkedin-in,
 [data-bs-theme=light] .fa-x-twitter,
