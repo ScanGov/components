@@ -2,15 +2,6 @@
 <script src="/js/tablesort-vendor.js"></script>
 <script src="/js/tablesort-init.js"></script>
 <script>
-  const setTheme = (dark) => {
-    document.body.setAttribute('data-bs-theme', dark ? 'dark' : 'light');
-  };
-  const darkQuery = window.matchMedia("(prefers-color-scheme: dark)");
-  const lightQuery = window.matchMedia("(prefers-color-scheme: light)");
-  setTheme(!lightQuery.matches);
-  darkQuery.addEventListener('change', e => setTheme(e.matches));
-</script>
-<script>
   const toggler = document.querySelector('button.navbar-toggler');
   if (toggler) {
     toggler.addEventListener('click', function(e) {
