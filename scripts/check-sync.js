@@ -9,7 +9,7 @@ import { readFileSync, readdirSync, statSync, existsSync } from 'node:fs';
 import path from 'node:path';
 
 const root = path.resolve(import.meta.dirname, '..');
-const siblings = ['docs', 'scangov', 'standards', 'scangov-com', 'my.scangov.com'];
+const siblings = ['docs', 'scangov', 'standards', 'scangov-com', 'my.scangov.com', 'data'];
 
 function walk(dir, base = dir) {
   let files = [];
@@ -27,6 +27,7 @@ function walk(dir, base = dir) {
 const trackedFiles = [
   'public/css/scangov.css',
   ...walk(path.join(root, '_includes')).map((f) => path.join('_includes', f)),
+  ...walk(path.join(root, 'public/assets/img/favicon')).map((f) => path.join('public/assets/img/favicon', f)),
 ];
 
 let outOfSync = 0;
@@ -34,14 +35,14 @@ let checked = 0;
 
 for (const relFile of trackedFiles) {
   const sourcePath = path.join(root, relFile);
-  const sourceContent = readFileSync(sourcePath, 'utf8');
+  const sourceContent = readFileSync(sourcePath);
 
   for (const sibling of siblings) {
     const siblingPath = path.join(root, '..', sibling, relFile);
     if (!existsSync(siblingPath)) continue; // sibling doesn't use this file — not a drift
     checked++;
-    const siblingContent = readFileSync(siblingPath, 'utf8');
-    if (siblingContent !== sourceContent) {
+    const siblingContent = readFileSync(siblingPath);
+    if (!siblingContent.equals(sourceContent)) {
       outOfSync++;
       console.log(`OUT OF SYNC: ${relFile} in ${sibling}`);
     }
