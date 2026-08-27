@@ -1,10 +1,10 @@
-<script src="/assets/bootstrap/js/bootstrap-trimmed.min.js"></script>
+<script src="/assets/bootstrap/js/bootstrap-trimmed.min.js" defer></script>
 <script src="/js/tablesort-vendor.js"></script>
 <script src="/js/tablesort-init.js"></script>
 <script>
   const toggler = document.querySelector('button.navbar-toggler');
   if (toggler) {
-    toggler.addEventListener('click', function(e) {
+    toggler.addEventListener('click', function() {
       document.querySelector(this.dataset.target).classList.toggle('show');
     });
   }
