@@ -14,6 +14,10 @@ const siblings = ['docs', 'scangov', 'standards', 'scangov-com', 'my.scangov.com
 // Files/siblings that are deliberately out of sync with components — verified
 // by hand, not drift. Keyed by relFile -> Set of sibling names to skip.
 const knownDrift = {
+  'sitemap.njk': new Set(['data']), // emits lastmod from dataset update times and lists dataset pages by hand
+  'robots.njk': new Set(['data']), // adds sitemap: false
+  'security.njk': new Set(['data']), // adds sitemap: false
+  'security-root.njk': new Set(['data']), // adds sitemap: false
   '_includes/js.html': new Set(['scangov']), // full domain-search autocomplete widget, Jekyll-style templating
   '_includes/header.html': new Set(['docs', 'scangov', 'standards', 'scangov-com', 'data']), // JSON-LD schema differs per site type; og:image intentionally shared across sites
   '_includes/footer.html': new Set(['scangov-com']), // marketing CTA section
@@ -45,6 +49,8 @@ function walk(dir, base = dir) {
 
 const trackedFiles = [
   'public/css/scangov.css',
+  // Root templates are copied into each site's content/ directory (see README.md).
+  ...['sitemap.njk', 'robots.njk', 'security.njk', 'security-root.njk'].map((f) => ({ source: f, sibling: path.join('content', f) })),
   ...walk(path.join(root, '_includes')).map((f) => path.join('_includes', f)),
   ...walk(path.join(root, 'public/assets/img/favicon')).map((f) => path.join('public/assets/img/favicon', f)),
 ];
@@ -52,12 +58,16 @@ const trackedFiles = [
 let outOfSync = 0;
 let checked = 0;
 
-for (const relFile of trackedFiles) {
+for (const tracked of trackedFiles) {
+  // Entries are either a path that is the same in components and the sibling,
+  // or { source, sibling } when the sibling keeps the file somewhere else.
+  const relFile = typeof tracked === 'string' ? tracked : tracked.source;
+  const siblingRel = typeof tracked === 'string' ? tracked : tracked.sibling;
   const sourcePath = path.join(root, relFile);
   const sourceContent = readFileSync(sourcePath);
 
   for (const sibling of siblings) {
-    const siblingPath = path.join(root, '..', sibling, relFile);
+    const siblingPath = path.join(root, '..', sibling, siblingRel);
     if (!existsSync(siblingPath)) continue; // sibling doesn't use this file — not a drift
     if (knownDrift[relFile]?.has(sibling)) continue; // verified intentional, see knownDrift above
     checked++;
