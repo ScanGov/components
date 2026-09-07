@@ -14,7 +14,7 @@ const siblings = ['docs', 'scangov', 'standards', 'scangov-com', 'my.scangov.com
 // Files/siblings that are deliberately out of sync with components — verified
 // by hand, not drift. Keyed by relFile -> Set of sibling names to skip.
 const knownDrift = {
-  'sitemap.njk': new Set(['data']), // emits lastmod from dataset update times and lists dataset pages by hand
+  'sitemap.njk': new Set(['data', 'scangov']), // data: lastmod from dataset update times, dataset pages listed by hand; scangov: sitemap index with per-section child files
   'robots.njk': new Set(['data']), // adds sitemap: false
   'security.njk': new Set(['data']), // adds sitemap: false
   'security-root.njk': new Set(['data']), // adds sitemap: false
