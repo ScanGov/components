@@ -1,0 +1,13 @@
+{
+  "name": "@scangov/content-lint",
+  "version": "1.0.0",
+  "description": "Shared content-style lint checks for ScanGov site PRs.",
+  "private": true,
+  "main": "check-content.js",
+  "bin": {
+    "content-lint": "./check-content.js"
+  },
+  "scripts": {
+    "lint": "node check-content.js"
+  }
+}
