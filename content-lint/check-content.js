@@ -4,9 +4,9 @@
  * Enforces the deterministic subset of the `content-style` skill
  * (see https://github.com/ScanGov/skills, content-style plugin):
  * sentence-case headings, no quote marks in headings, acronym-first-use,
- * and gov-only terminology block. Oxford comma, "visitor"/"website"
- * terminology, table markup, <ol> usage, reading level, and passive voice
- * are heuristic and reported as warnings, not failures.
+ * and gov-only terminology block. Oxford comma, table markup, <ol> usage,
+ * reading level, and passive voice are heuristic and reported as warnings,
+ * not failures.
  *
  * Usage: node check-content.js <file> [file...]
  * Exit code 1 if any `error`-severity violation is found.
@@ -33,10 +33,8 @@ const PROPER_NOUN_ALLOWLIST = new Set([
 
 const TERMINOLOGY = [
   { pattern: /\bcitizens?\b/gi, suggestion: 'users', severity: 'error' },
-  { pattern: /\bvisitors?\b/gi, suggestion: 'users (in ScanGov\'s own product/marketing copy — third-person reporting about another site\'s visitors is a different context)', severity: 'warn' },
   { pattern: /\bgovernment services\b/gi, suggestion: 'services', severity: 'error' },
   { pattern: /\bgovernment records\b/gi, suggestion: 'data (or "confidential data")', severity: 'error' },
-  { pattern: /\bwebsites?\b/gi, suggestion: 'digital properties/services (when referring broadly — a specific named site is fine)', severity: 'warn' },
   { pattern: /\bUS\b/g, suggestion: 'U.S. (with periods)', severity: 'error' }, // case-sensitive: bare "US", not the pronoun "us" or "U.S."
 ];
 
