@@ -3,9 +3,10 @@
  * Shared content-style linter for ScanGov sites.
  * Enforces the deterministic subset of the `content-style` skill
  * (see https://github.com/ScanGov/skills, content-style plugin):
- * sentence-case headings, Oxford comma, acronym-first-use, and
- * gov-only/website terminology. Reading level and passive voice are
- * heuristic and reported as warnings, not failures.
+ * sentence-case headings, no quote marks in headings, acronym-first-use,
+ * and gov-only terminology block. Oxford comma, table markup, <ol> usage,
+ * reading level, and passive voice are heuristic and reported as warnings,
+ * not failures.
  *
  * Usage: node check-content.js <file> [file...]
  * Exit code 1 if any `error`-severity violation is found.
@@ -19,7 +20,7 @@ const path = require('path');
 const ACRONYM_ALLOWLIST = new Set([
   'URL', 'URLS', 'HTML', 'CSS', 'PDF', 'FAQ', 'API', 'SEO', 'DNS',
   'HTTP', 'HTTPS', 'CSV', 'JSON', 'XML', 'ID', 'RSS', 'JS', 'UI', 'UX', 'AI',
-  'US', 'IP', 'GET', 'COVID', // near-universal recognition, same tier as AI
+  'US', 'IP', 'GET', 'COVID', 'IT', // near-universal recognition, same tier as AI
   'AA', 'AAA', // WCAG conformance levels, not acronyms in the "spell it out" sense
   'II', // Roman numeral used in ADA Title II / Section 508 references, not an acronym
   'YYYY', 'MM', 'DD', // date-format placeholders, not acronyms
@@ -32,10 +33,9 @@ const PROPER_NOUN_ALLOWLIST = new Set([
 
 const TERMINOLOGY = [
   { pattern: /\bcitizens?\b/gi, suggestion: 'users', severity: 'error' },
-  { pattern: /\bvisitors?\b/gi, suggestion: 'users', severity: 'error' },
   { pattern: /\bgovernment services\b/gi, suggestion: 'services', severity: 'error' },
   { pattern: /\bgovernment records\b/gi, suggestion: 'data (or "confidential data")', severity: 'error' },
-  { pattern: /\bwebsites?\b/gi, suggestion: 'digital properties/services (when referring broadly — a specific named site is fine)', severity: 'warn' },
+  { pattern: /\bUS\b/g, suggestion: 'U.S. (with periods)', severity: 'error' }, // case-sensitive: bare "US", not the pronoun "us" or "U.S."
 ];
 
 function stripTags(line) {
@@ -66,7 +66,16 @@ function stripMarkdown(line) {
 function extractHeadings(content, ext) {
   const headings = [];
   const lines = content.split('\n');
+  const frontmatterOpen = lines[0] && lines[0].trim() === '---';
+  let frontmatterClosed = false;
   lines.forEach((line, i) => {
+    if (frontmatterOpen && !frontmatterClosed) {
+      if (i > 0 && line.trim() === '---') frontmatterClosed = true;
+      // A leading "#" inside frontmatter is a YAML comment (e.g.
+      // `# modified: YYYY-MM-DD`), not a markdown heading — skip the
+      // whole block regardless.
+      return;
+    }
     if (ext === '.md') {
       const m = line.match(/^#{1,6}\s+(.+)$/);
       if (m) headings.push({ line: i + 1, text: stripTags(m[1]) });
@@ -106,6 +115,18 @@ function checkSentenceCase(headings, violations) {
       severity: 'error',
       rule: 'sentence-case-headings',
       message: `Heading uses title case (${flagged.map((w) => `"${w}"`).join(', ')}): "${text}"`,
+    });
+  });
+}
+
+function checkHeadingQuotes(headings, violations) {
+  headings.forEach(({ line, text }) => {
+    if (!/["“”]/.test(text)) return;
+    violations.push({
+      line,
+      severity: 'error',
+      rule: 'heading-quotes',
+      message: `Heading uses quote marks for emphasis, not an actual quotation: "${text}"`,
     });
   });
 }
@@ -193,6 +214,88 @@ function fleschKincaidGrade(text) {
   return 0.39 * (words.length / sentences.length) + 11.8 * (syllables / words.length) - 15.59;
 }
 
+// Warn-level: markdown-syntax tables (| a | b |) don't render as <table> in
+// source, so this only catches raw HTML tables — a known gap, not a bug.
+function checkTables(content, violations) {
+  const re = /<table\b[^>]*>/gi;
+  let m;
+  while ((m = re.exec(content))) {
+    const tag = m[0];
+    const start = m.index;
+    const before = content.slice(Math.max(0, start - 300), start);
+    const after = content.slice(start, start + 400);
+    const lineNo = content.slice(0, start).split('\n').length;
+    const problems = [];
+    if (!/class="[^"]*\btable\b[^"]*"/i.test(tag)) problems.push('missing class="table"');
+    if (!/table-responsive/i.test(before)) problems.push('not wrapped in .table-responsive');
+    if (!/<caption\b/i.test(after)) problems.push('missing <caption>');
+    if (!problems.length) continue;
+    violations.push({
+      line: lineNo,
+      severity: 'warn',
+      rule: 'table-convention',
+      message: `Table doesn't follow the components pattern (${problems.join(', ')}) — see components/public/templates/tables.html`,
+    });
+  }
+}
+
+// Warn-level only: whether a list is truly sequential is a judgment call
+// the tool can't make — this just prompts a second look.
+function checkOrderedLists(content, violations) {
+  const htmlRe = /<ol\b[^>]*>/gi;
+  let m;
+  while ((m = htmlRe.exec(content))) {
+    const lineNo = content.slice(0, m.index).split('\n').length;
+    violations.push({
+      line: lineNo,
+      severity: 'warn',
+      rule: 'ordered-list',
+      message: '<ol> found — confirm this is a sequential/step list; use <ul> for any collection without a required order',
+    });
+  }
+
+  let inBlock = false;
+  content.split('\n').forEach((line, i) => {
+    const isItem = /^\s*\d+\.\s+/.test(line);
+    if (isItem && !inBlock) {
+      violations.push({
+        line: i + 1,
+        severity: 'warn',
+        rule: 'ordered-list',
+        message: 'Numbered list found — confirm this is a sequential/step list; use "-" for any collection without a required order',
+      });
+    }
+    inBlock = isItem;
+  });
+}
+
+// Warn-level: a report (isReport: true in frontmatter, see the
+// report-format skill) is expected to have these headings. Warn, not
+// block — a report might legitimately be structured differently.
+const REQUIRED_REPORT_HEADINGS = [
+  'What we scanned',
+  'What we learned',
+  "Why this matters",
+  "Who's responsible",
+  'About the data',
+  'What to do next',
+  'About ScanGov',
+];
+
+function checkReportStructure(content, headings, violations) {
+  if (!/^isReport:\s*true\s*$/m.test(content)) return;
+  const headingTexts = headings.map((h) => h.text.toLowerCase());
+  REQUIRED_REPORT_HEADINGS.forEach((required) => {
+    if (headingTexts.includes(required.toLowerCase())) return;
+    violations.push({
+      line: null,
+      severity: 'warn',
+      rule: 'report-structure',
+      message: `isReport: true but no "## ${required}" heading found — see the report-format skill`,
+    });
+  });
+}
+
 function checkPassiveVoice(line, lineNo, violations) {
   const re = /\b(is|are|was|were|been|being|be)\s+\w+ed\b/gi;
   let m;
@@ -214,6 +317,10 @@ function lintFile(filePath) {
   const violations = [];
   const headings = extractHeadings(content, ext);
   checkSentenceCase(headings, violations);
+  checkHeadingQuotes(headings, violations);
+  checkTables(content, violations);
+  checkOrderedLists(content, violations);
+  checkReportStructure(content, headings, violations);
 
   const proseLines = []; // { lineNo, plain }
   const lines = content.split('\n');
