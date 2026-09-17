@@ -1,0 +1,106 @@
+{% raw %}
+<!-- Reusable Chart.js bar chart for report/data posts. Requires
+     public/js/chartjs-vendor.js + public/js/report-charts-init.js on the
+     page, and the `numberFormat` Nunjucks filter. Mirrors the styling
+     approach my.scangov.com's Pulse feature uses (theme-aware colors from
+     --bs-* / --report-chart-* custom properties in scangov.css, Chart.js's
+     own built-in Legend plugin rather than hand-built HTML).
+
+     Usage — set these variables, then include this file:
+       {% set chartCaption = "What happens when ScanGovBot asks for a county homepage" %}
+       {% set chartSubcaption = "2,858 US county websites, September 2026" %}
+       {% set chartValueLabel = "Counties" %}
+       {% set chartRows = [
+         { label: "Lets the bot in", value: 2435 },
+         { label: "Turns away the basic request only", value: 100, muted: true }
+       ] %}
+       {% include "report-chart.html" %}
+
+     `chartRows` is the single source of truth for both the chart and its
+     accessible data-table fallback — they can't drift out of sync.
+
+     Optional `chartShareTotal`: the denominator for the tooltip/table
+     percentage, if it's not just the sum of chartRows (e.g. three charts
+     that each show a subset of one larger population — all should show
+     "share of 2,858", not "share of this chart's own rows").
+
+     `chartMainLabel` / `chartMutedLabel`: set both when a chart mixes
+     `muted: true` and non-muted rows, to render a legend (red =
+     main/flagged, green = muted/other — see .report-chart in scangov.css).
+     Set only `chartMainLabel` on a single-color chart. The legend is
+     Chart.js's own Legend plugin (position: bottom), not hand-built HTML —
+     don't reference bar colors in prose ("the red bars"); some readers
+     can't distinguish them. Use a legend whenever a chart's colors carry
+     meaning; skip it only when they don't.
+
+     Multiple charts on one page: re-set every variable before each
+     `{% include %}` call, including optional ones you're not using this
+     time (e.g. `{% set chartMainLabel = "" %}`). This file's own trailing
+     resets (below) don't reliably clear the parent scope for a variable
+     the calling template never re-sets itself — observed with
+     chartMainLabel/chartMutedLabel leaking a legend onto later charts that
+     had no muted rows. Don't rely on them; be explicit at each call site.
+
+     Chart.js has no built-in "attribution" concept — the ScanGov credit
+     below is plain HTML, not a canvas plugin.
+
+     The data table sits in a Bootstrap accordion (not native
+     <details>/<summary>) — matches components/public/templates/
+     accordion.html. Its button/collapse IDs are derived from
+     `chartCaption` via Eleventy's built-in `slugify` filter, so two
+     charts with the same caption on one page would collide; give them
+     distinct captions. Uses `table table-sm table-bordered small` — the
+     "Dense data" pattern in components/public/templates/tables.html —
+     not just `table table-sm`. -->
+
+{% endraw %}
+<figure class="report-chart">
+  <figcaption>
+    <strong>{{ chartCaption }}</strong>{% if chartSubcaption %}<br><span class="sub">{{ chartSubcaption }}</span>{% endif %}
+  </figcaption>
+  {% set sortedRows = chartRows | sort(attribute="value", reverse=true) %}
+  <canvas data-report-chart data-rows="{{ { rows: sortedRows, total: chartShareTotal, mainLabel: chartMainLabel, mutedLabel: chartMutedLabel } | dump }}" aria-label="{{ chartCaption }}" role="img"></canvas>
+  <p class="report-chart-credit small text-body-secondary text-end">Source: ScanGov</p>
+  {% set chartSlug = chartCaption | slugify %}
+  <div class="accordion">
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="{{ chartSlug }}-table-heading">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#{{ chartSlug }}-table-collapse" aria-expanded="false" aria-controls="{{ chartSlug }}-table-collapse">
+          <i class="fa-solid fa-table me-2" aria-hidden="true"></i>Data table
+        </button>
+      </h2>
+      <div id="{{ chartSlug }}-table-collapse" class="accordion-collapse collapse" aria-labelledby="{{ chartSlug }}-table-heading">
+        <div class="accordion-body">
+          <div class="table-responsive">
+            <table class="table table-sm table-bordered small">
+              <caption class="visually-hidden">{{ chartCaption }}</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Category</th>
+                  <th scope="col">{{ chartValueLabel or "Value" }}</th>
+                  {% if chartShareTotal %}<th scope="col">Share of {{ chartShareTotal | numberFormat }}</th>{% endif %}
+                </tr>
+              </thead>
+              <tbody>
+                {% for row in sortedRows %}
+                <tr>
+                  <td>{{ row.label }}</td>
+                  <td>{{ row.value | numberFormat }}</td>
+                  {% if chartShareTotal %}<td>{{ ((row.value / chartShareTotal) * 100) | round(1) }}%</td>{% endif %}
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</figure>
+{% set chartCaption = "" %}
+{% set chartSubcaption = "" %}
+{% set chartValueLabel = "" %}
+{% set chartRows = [] %}
+{% set chartShareTotal = "" %}
+{% set chartMainLabel = "" %}
+{% set chartMutedLabel = "" %}

@@ -1,6 +1,6 @@
 # content-lint
 
-Shared, dependency-free content-style checks for ScanGov site pull requests. Enforces the deterministic subset of the `content-style` skill ([ScanGov/skills](https://github.com/ScanGov/skills)): sentence-case headings, acronym-first-use, and gov-only terminology block the PR. Oxford comma, broad "website" usage, reading level, and passive voice are reported as warnings — they're heuristic and can false-positive (e.g. Oxford comma can't tell a real 3-item series from a 2-word compound sharing a list slot).
+Shared, dependency-free content-style checks for ScanGov site pull requests. Enforces the deterministic subset of the `content-style` skill ([ScanGov/skills](https://github.com/ScanGov/skills)): sentence-case headings, no quote marks in headings, acronym-first-use, and gov-only terminology (citizens/government services/government records) block the PR. Oxford comma, "visitor"/"website" usage, table markup, `<ol>` usage, reading level, and passive voice are reported as warnings — they're heuristic and can false-positive (e.g. Oxford comma can't tell a real 3-item series from a 2-word compound sharing a list slot; whether an `<ol>` is truly sequential needs human judgment).
 
 ## Usage
 
