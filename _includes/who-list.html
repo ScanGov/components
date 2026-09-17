@@ -2,7 +2,9 @@
 <!-- Renders a plain <ul> of role names from _data/who.json, filtered to
      the given titles — for a report's "Who's responsible" section, so the
      audience list is one shared source of truth instead of retyped per
-     report. Text only, no icons.
+     report. Text only, no icons. Each role links to its who-we-serve
+     audience page (/who-we-serve/{slug}/) when the entry has a `slug`;
+     falls back to plain text otherwise.
 
      Usage — set `whoRoles` to the exact `title` values from who.json,
      then include this file:
@@ -20,5 +22,5 @@
      Titles must match who.json exactly (case-sensitive) — a typo silently
      drops that role from the list rather than erroring. -->
 {% endraw %}
-<ul class="who-list">{% for role in who %}{% if role.title in whoRoles %}<li>{{ role.title }}</li>{% endif %}{% endfor %}</ul>
+<ul class="who-list">{% for role in who %}{% if role.title in whoRoles %}<li>{% if role.slug %}<a href="/who-we-serve/{{ role.slug }}/">{{ role.title }}</a>{% else %}{{ role.title }}{% endif %}</li>{% endif %}{% endfor %}</ul>
 {% set whoRoles = [] %}
