@@ -1,0 +1,25 @@
+{
+  "name": "components",
+  "version": "1.0.0",
+  "description": "Shared Eleventy templates and includes used across ScanGov sites.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "http-server . -p 8080 -c-1 -o"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ScanGov/components.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/ScanGov/components/issues"
+  },
+  "homepage": "https://github.com/ScanGov/components#readme",
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}
