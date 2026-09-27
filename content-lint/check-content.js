@@ -357,12 +357,12 @@ function lintFile(filePath) {
   });
 
   const grade = fleschKincaidGrade(proseLines.map((p) => p.plain).join(' '));
-  if (grade !== null && grade > 9) {
+  if (grade !== null && grade > 6) {
     violations.push({
       line: null,
       severity: 'warn',
       rule: 'reading-level',
-      message: `Estimated reading grade level ${grade.toFixed(1)} exceeds the 9th-grade target`,
+      message: `Estimated reading grade level ${grade.toFixed(1)} exceeds the 6th-grade target`,
     });
   }
 
