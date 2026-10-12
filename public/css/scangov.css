@@ -160,11 +160,17 @@
        (.sg-series-*). Dataviz reference palette steps; validated 2026-09-22
        on #1a1b2e: lightness band, chroma and contrast pass, adjacent pairs
        pass CVD. Purple and blue are close for red-green CVD, so use these
-       only where each chart carries its indicator's name. */
+       only where each chart carries its indicator's name.
+       Readability (rose) added 2026-10-11, validated in the same way with
+       readability rendered LAST, after usability: rose vs purple is the
+       tightest adjacent pair (normal-vision dE 15.7, floor 15). Between
+       botability green and security orange no hue passes, so keep
+       readability at the end of every side-by-side topic sequence. */
     --sg-indicator-accessibility: #3987e5;
     --sg-indicator-botability: #199e70;
     --sg-indicator-security: #d95926;
     --sg-indicator-usability: #b565d1;
+    --sg-indicator-readability: #e63b7a;
 }
 
 /* Light mode */
@@ -249,11 +255,13 @@
     --sg-chart-muted: #6b7280;
     --sg-chart-grid: var(--bs-border-color);
     --sg-chart-track: rgba(19, 23, 31, 0.08);
-    /* Indicator hues on #fff: every validator check passes, all pairs. */
+    /* Indicator hues on #fff: every validator check passes, all pairs
+       (readability: adjacent pairs, rendered last; 5.9:1 on #fff). */
     --sg-indicator-accessibility: #2a78d6;
     --sg-indicator-botability: #199e70;
     --sg-indicator-security: #eb6834;
     --sg-indicator-usability: #4a3aa7;
+    --sg-indicator-readability: #c2185b;
 }
 
 /* Status badge overrides */
@@ -2096,12 +2104,13 @@ a[href$=".mp4"]::after {
     color: #d5bfff !important;
 }
 
+/* Readability indicator icon (rose). Also the readability docs page and tool. */
 .fa-book-open {
-    color: #c3ebfa !important;
+    color: #ffb3d1 !important;
 }
 
 .fa-book-open-reader {
-    color: #c3ebfa !important;
+    color: #ffb3d1 !important;
 }
 
 .fa-truck-ramp-box {
@@ -4134,6 +4143,7 @@ blockquote .lead {
 .sg-series-botability { --sg-chart-series-1: var(--sg-indicator-botability); }
 .sg-series-security { --sg-chart-series-1: var(--sg-indicator-security); }
 .sg-series-usability { --sg-chart-series-1: var(--sg-indicator-usability); }
+.sg-series-readability { --sg-chart-series-1: var(--sg-indicator-readability); }
 
 /* Even rows: every bar row is two label lines tall, whether its label wraps
    or not, so charts with the same row count come out the same height when
