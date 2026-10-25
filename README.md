@@ -64,4 +64,5 @@ Requires in `site.json`:
 | `post-links.html` | Post navigation links |
 | `scangov.html` | ScanGov branding |
 | `schema-docs.html` | JSON-LD schema for docs pages |
+| `tool-form.html` | Single-field tool form (label, large input, large button). Set `toolFormId`, `toolFieldLabel`, `toolPlaceholder`, `toolButtonLabel` before including. Wrap in the tool page shell: `container` > `row` > `col-md-2` / `col-md-8` / `col-md-2` |
 | `404.html` | 404 error page |

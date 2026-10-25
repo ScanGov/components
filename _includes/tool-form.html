@@ -1,0 +1,27 @@
+{#
+Shared form for single-field tools (good bot scan, readability scan).
+Set these before including:
+  toolFormId       form id (the tool's script binds to it)
+  toolFieldLabel   label text, e.g. "Domain" or "Page URL"
+  toolPlaceholder  input placeholder
+  toolButtonLabel  submit button text
+The input is always name="site" id="site". The submit button is id="submitbutton".
+#}
+<form id="{{ toolFormId }}">
+  <div class="mb-3">
+    <label for="site" class="form-label">{{ toolFieldLabel }}
+      <i class="fa-solid fa-asterisk" aria-hidden="true"></i>
+    </label>
+    <input
+      type="text"
+      class="form-control form-control-lg"
+      name="site"
+      id="site"
+      placeholder="{{ toolPlaceholder }}"
+      required>
+  </div>
+  <button
+    type="submit"
+    class="btn btn-primary btn-lg"
+    id="submitbutton">{{ toolButtonLabel }}</button>
+</form>
