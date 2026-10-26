@@ -8,6 +8,12 @@
 
   Both versions rely on scangov.css for body padding and grade text size.
   Do not add pt-5, pb-5, or text-center to .card-body — the CSS handles it.
+
+  Rules:
+    - Put the grade in a div.display-1 (or display-2), never a p, so it has no margin.
+    - Footers are left-aligned by default; do not add text-center to .card-footer.
+    - List indicators alphabetically by name, with no indicator pinned last.
+    - Theme follows the system setting. Do not add a theme toggle.
 -->
 
 <!-- Big (default) — outer card is the link -->
@@ -26,6 +32,19 @@
   </div>
   <div class="card-footer">Score 82%</div>
 </a>
+
+<!-- Big with info icon in the header (public scorecard) -->
+<div class="card card-grade text-bg-success">
+  <div class="card-header">
+    Security
+    <a href="https://standards.scangov.org/security" class="icon-link text-decoration-none" aria-label="More about Security">
+      <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+    </a>
+  </div>
+  <a href="https://standards.scangov.org/security" class="card-body text-decoration-none stretched-link">
+    <div class="display-1">A</div>
+  </a>
+</div>
 
 <!-- Small — header link + body link (no footer) -->
 <div class="card card-grade-sm text-bg-success">

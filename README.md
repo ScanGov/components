@@ -66,3 +66,15 @@ Requires in `site.json`:
 | `schema-docs.html` | JSON-LD schema for docs pages |
 | `tool-form.html` | Single-field tool form (label, large input, large button). Set `toolFormId`, `toolFieldLabel`, `toolPlaceholder`, `toolButtonLabel` before including. Wrap in the tool page shell: `container` > `row` > `col-md-2` / `col-md-8` / `col-md-2` |
 | `404.html` | 404 error page |
+
+## Scorecard
+
+The public scorecard (my.scangov.com `/public/:orgkey/:siteslug/report`) and the scangov.org report pages share one card markup. `_includes/grade-card.html` shows each variant; `public/css/scangov.css` holds `.card-grade` and `.card-grade-sm`.
+
+- One card for Overall, then one per indicator, in alphabetical order. No indicator is pinned last.
+- Card parts: header (label and info icon), body (the grade in `div.display-1`), optional footer.
+- Color comes from the score (`text-bg-success`, `-warning`, `-danger`); the grade is always shown as a letter, so color is never the only signal.
+- Footers are left-aligned.
+- The theme follows the system setting (`prefers-color-scheme`). Do not add a theme toggle.
+- Info icons and links inside a status card (`text-bg-success`, `-warning`, `-danger`) take the card's text color in both themes: white on red, dark on green and yellow. `scangov.css` handles it; do not set a color on the icon.
+- Icon colors: black in light mode. Check `scangov.css` for a color rule when you add an icon, and sync the CSS to all sites.
