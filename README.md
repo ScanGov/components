@@ -55,6 +55,7 @@ Requires in `site.json`:
 | `toc-mobile.html` | Mobile table of contents |
 | `actions.html` | Action buttons |
 | `audio.html` | Audio player |
+| `cta.html` | Fixed bottom band with Get started, Copy link, Copy text (included from `footer.html`) |
 | `connect.html` | Social/connect links |
 | `details.html` | Expandable details |
 | `feedback.html` | Feedback form |
