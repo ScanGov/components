@@ -55,7 +55,7 @@ Requires in `site.json`:
 | `toc-mobile.html` | Mobile table of contents |
 | `actions.html` | Action buttons |
 | `audio.html` | Audio player |
-| `cta.html` | Fixed bottom band with Get started, Copy link, Copy text (included from `footer.html`) |
+| `cta.html` | Fixed bottom band with Plans, Demo, Link and Text buttons (included from `footer.html`) |
 | `connect.html` | Social/connect links |
 | `details.html` | Expandable details |
 | `feedback.html` | Feedback form |
@@ -67,6 +67,23 @@ Requires in `site.json`:
 | `schema-docs.html` | JSON-LD schema for docs pages |
 | `tool-form.html` | Single-field tool form (label, large input, large button). Set `toolFormId`, `toolFieldLabel`, `toolPlaceholder`, `toolButtonLabel` before including. Wrap in the tool page shell: `container` > `row` > `col-md-2` / `col-md-8` / `col-md-2` |
 | `404.html` | 404 error page |
+
+## Buttons
+
+Two styles, one size rule, defined once in `public/css/scangov.css`:
+
+| Style | Classes | Use for |
+|---|---|---|
+| Primary | `btn btn-primary` | The one main action on a view (form submit, Save, Get started) |
+| Secondary | `btn btn-outline-primary` | Everything else (go to a page, Cancel, Close, Edit, Remove, Copy, Download) |
+
+- Default size; `btn-sm` only in a table row or toolbar; no `btn-lg`.
+- `<a>` goes somewhere, `<button>` does something. Both take the same classes.
+- Icons are leading and decorative, and always match the label color; the button's `gap` spaces them.
+- Tabs, view switchers, pagination, accordions and the close X are not buttons.
+- `node scripts/check-sync.js` also fails on any other `btn-*` class in a site repo.
+
+The full rules are in the `buttons` skill in [ScanGov/skills](https://github.com/ScanGov/skills), and every state is shown in `public/templates/buttons.html`.
 
 ## Scorecard
 

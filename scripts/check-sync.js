@@ -78,6 +78,34 @@ for (const tracked of trackedFiles) {
   }
 }
 
+// Button classes: only primary and secondary (see the buttons skill in ScanGov/skills).
+// Scans each sibling's templates, includes and client scripts for any other btn-* class.
+const allowedButtonClasses = new Set(['btn', 'btn-primary', 'btn-outline-primary', 'btn-sm', 'btn-danger', 'btn-close', 'btn-check', 'btn-group']);
+const buttonSkip = ['node_modules', '_site', '.git', 'assets', 'e2e', 'test-results', 'docs'];
+let badButtons = 0;
+function scanButtons(dir, repo) {
+  for (const entry of readdirSync(dir)) {
+    if (buttonSkip.includes(entry) || entry.endsWith('.min.js') || entry.startsWith('bundle')) continue;
+    const full = path.join(dir, entry);
+    if (statSync(full).isDirectory()) {
+      scanButtons(full, repo);
+    } else if (/\.(html|njk|md|mjs|js)$/.test(entry)) {
+      readFileSync(full, 'utf8').split('\n').forEach((line, i) => {
+        for (const m of line.matchAll(/(?<![\w-])btn-[a-z-]+/g)) {
+          if (allowedButtonClasses.has(m[0])) continue;
+          badButtons++;
+          console.log(`DISALLOWED BUTTON CLASS: ${m[0]} in ${repo}/${path.relative(path.join(root, '..', repo), full)}:${i + 1}`);
+        }
+      });
+    }
+  }
+}
+for (const sibling of siblings) {
+  const dir = path.join(root, '..', sibling);
+  if (existsSync(dir)) scanButtons(dir, sibling);
+}
+if (badButtons > 0) outOfSync += badButtons;
+
 if (outOfSync === 0) {
   console.log(`check-sync: all ${checked} file/repo pairs in sync.`);
 } else {
