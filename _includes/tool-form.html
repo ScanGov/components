@@ -5,23 +5,37 @@ Set these before including:
   toolFieldLabel   label text, e.g. "Domain" or "Page URL"
   toolPlaceholder  input placeholder
   toolButtonLabel  submit button text
-The input is always name="site" id="site". The submit button is id="submitbutton".
+Optional, for tools whose main field is not a site:
+  toolFieldName    input name and id (default "site")
+  toolFormAction   form action, for tools that submit to another page
+  toolFormExtra    extra fields, each in a col-* div, rendered between the input and the button
+                   (capture with {% set toolFormExtra %}...{% endset %})
+The submit button is always id="submitbutton", followed by a Reset button (id="resetbutton").
 #}
-<form id="{{ toolFormId }}">
-  <div class="mb-3">
-    <label for="site" class="form-label">{{ toolFieldLabel }}
+<form id="{{ toolFormId }}"{% if toolFormAction %} action="{{ toolFormAction }}"{% endif %}>
+  <div class="row g-3">
+  <div class="col-12">
+    <label for="{{ toolFieldName or 'site' }}" class="form-label">{{ toolFieldLabel }}
       <i class="fa-solid fa-asterisk" aria-hidden="true"></i>
     </label>
     <input
       type="text"
       class="form-control form-control-lg"
-      name="site"
-      id="site"
+      name="{{ toolFieldName or 'site' }}"
+      id="{{ toolFieldName or 'site' }}"
       placeholder="{{ toolPlaceholder }}"
       required>
   </div>
-  <button
-    type="submit"
-    class="btn btn-primary"
-    id="submitbutton">{{ toolButtonLabel }}</button>
+  {% if toolFormExtra %}{{ toolFormExtra | safe }}{% endif %}
+  <div class="col-12 d-flex flex-wrap gap-2">
+    <button
+      type="submit"
+      class="btn btn-primary"
+      id="submitbutton">{{ toolButtonLabel }}</button>
+    <button
+      type="reset"
+      class="btn btn-outline-primary"
+      id="resetbutton">Reset</button>
+  </div>
+  </div>
 </form>
