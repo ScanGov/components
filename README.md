@@ -6,6 +6,10 @@ Shared Eleventy templates and includes used across ScanGov sites.
 
 Copy templates to each site's `content/` directory. Copy `_includes/` files to each site's `_includes/` directory.
 
+## Syncing to the sites
+
+Always do a full sync. When a shared file changes here (`public/css/scangov.css`, an `_includes/` file), copy the whole file to every site: scangov-com, scangov, docs, standards, data, and my.scangov.com. Never add a few lines to an older copy in a site. Rebuild `scripts/bundle.css` where it is tracked (scangov-com, standards). Then run `node scripts/check-sync.js`; it must report no drift except the entries listed in its `knownDrift`. If a site is behind, bring it fully up to date in the same pull request.
+
 All templates require `layout: false` in front matter to prevent directory-level layout defaults from wrapping non-HTML output.
 
 ## Templates
