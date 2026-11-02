@@ -6,6 +6,10 @@ Shared Eleventy templates and includes used across ScanGov sites.
 
 Copy templates to each site's `content/` directory. Copy `_includes/` files to each site's `_includes/` directory.
 
+## Syncing to the sites
+
+Always do a full sync. When a shared file changes here (`public/css/scangov.css`, an `_includes/` file), copy the whole file to every site: scangov-com, scangov, docs, standards, data, and my.scangov.com. Never add a few lines to an older copy in a site. Rebuild `scripts/bundle.css` where it is tracked (scangov-com, standards). Then run `node scripts/check-sync.js`; it must report no drift except the entries listed in its `knownDrift`. If a site is behind, bring it fully up to date in the same pull request.
+
 All templates require `layout: false` in front matter to prevent directory-level layout defaults from wrapping non-HTML output.
 
 ## Templates
@@ -96,3 +100,4 @@ The public scorecard (my.scangov.com `/public/:orgkey/:siteslug/report`) and the
 - The theme follows the system setting (`prefers-color-scheme`). Do not add a theme toggle.
 - Info icons and links inside a status card (`text-bg-success`, `-warning`, `-danger`) take the card's text color in both themes: white on red, dark on green and yellow. `scangov.css` handles it; do not set a color on the icon.
 - Icon colors: black in light mode. Check `scangov.css` for a color rule when you add an icon, and sync the CSS to all sites.
+- One icon per function, everywhere: Sample is `fa-spray-can-sparkles`; Customize (a collapsed group of optional settings) is `fa-sliders`.
