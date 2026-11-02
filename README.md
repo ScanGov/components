@@ -96,3 +96,4 @@ The public scorecard (my.scangov.com `/public/:orgkey/:siteslug/report`) and the
 - The theme follows the system setting (`prefers-color-scheme`). Do not add a theme toggle.
 - Info icons and links inside a status card (`text-bg-success`, `-warning`, `-danger`) take the card's text color in both themes: white on red, dark on green and yellow. `scangov.css` handles it; do not set a color on the icon.
 - Icon colors: black in light mode. Check `scangov.css` for a color rule when you add an icon, and sync the CSS to all sites.
+- One icon per function, everywhere: Sample is `fa-spray-can-sparkles`; Customize (a collapsed group of optional settings) is `fa-sliders`.
