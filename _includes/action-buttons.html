@@ -1,0 +1,73 @@
+{#
+  Action buttons for a page or a generated document: Edit, Copy link, Copy,
+  Download, Print, and Reset. Icon-only and btn-sm, except Reset, which keeps its
+  text because it clears what the person entered. See the buttons skill in
+  ScanGov/skills, and public/js/action-buttons.js, which does the work.
+
+  Set these before including (all optional):
+    actionsContentId    selector for the document, such as "#policy-content".
+                        Without it, the formats that need a document are left out.
+    actionsFileName     download name without the extension (the date is added)
+    actionsEditHref     form address, without the query string
+    actionsPrintHref    print view address, without the query string. Without it,
+                        Print opens the browser print dialog.
+    actionsResetHref    address of the blank form. Without it, there is no Reset.
+    actionsCopy         copy formats, default ["text", "md"]
+    actionsDownload     download formats, default ["html", "json", "md", "txt", "docx"]
+    actionsWrapperClass default "mb-4 pb-4 border-bottom"
+
+  A format that does not apply is left out by the script. A menu with one
+  format becomes a single button, and a menu with none is removed.
+#}
+{% set copyFormats = actionsCopy or ["text", "md"] %}
+{% set downloadFormats = actionsDownload or ["html", "json", "md", "txt", "docx"] %}
+{% set copyLabels = { text: "Text", md: "Markdown" } %}
+{% set downloadLabels = { html: "HTML (.html)", json: "JSON (.json)", md: "Markdown (.md)", txt: "Text (.txt)", docx: "Word (.docx)" } %}
+<div class="{{ actionsWrapperClass or 'mb-4 pb-4 border-bottom' }}">
+  <div class="d-flex flex-wrap gap-2 mt-2 mb-2" data-actions data-content="{{ actionsContentId }}" data-filename="{{ actionsFileName }}">
+    {% if actionsEditHref %}
+    <a href="{{ actionsEditHref }}" data-keep-query class="btn btn-outline-primary btn-sm" aria-label="Edit" title="Edit">
+      <i class="fa-solid fa-pen" aria-hidden="true"></i>
+    </a>
+    {% endif %}
+    <button type="button" class="btn btn-outline-primary btn-sm" data-action="copy-link" aria-label="Copy link" title="Copy link">
+      <i class="fa-solid fa-link" aria-hidden="true"></i><i class="fa-solid fa-check d-none" aria-hidden="true"></i>
+    </button>
+    <div class="dropdown" data-menu="copy">
+      <button type="button" id="copy-menu" class="btn btn-outline-primary btn-sm" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Copy" title="Copy">
+        <i class="fa-solid fa-copy" aria-hidden="true"></i><i class="fa-solid fa-check d-none" aria-hidden="true"></i>
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="copy-menu">
+        {% for format in copyFormats %}
+        <li class="small"><button type="button" class="dropdown-item" data-copy="{{ format }}">{{ copyLabels[format] }}</button></li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="dropdown" data-menu="download">
+      <button type="button" id="download-menu" class="btn btn-outline-primary btn-sm" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download" title="Download">
+        <i class="fa-solid fa-download" aria-hidden="true"></i><i class="fa-solid fa-check d-none" aria-hidden="true"></i>
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="download-menu">
+        {% for format in downloadFormats %}
+        <li class="small"><button type="button" class="dropdown-item" data-download="{{ format }}">{{ downloadLabels[format] }}</button></li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% if actionsPrintHref %}
+    <a href="{{ actionsPrintHref }}" data-keep-query class="btn btn-outline-primary btn-sm" aria-label="Print" title="Print">
+      <i class="fa-solid fa-print" aria-hidden="true"></i>
+    </a>
+    {% else %}
+    <button type="button" class="btn btn-outline-primary btn-sm" data-action="print" aria-label="Print" title="Print">
+      <i class="fa-solid fa-print" aria-hidden="true"></i>
+    </button>
+    {% endif %}
+    {% if actionsResetHref %}
+    <a href="{{ actionsResetHref }}" class="btn btn-outline-primary btn-sm">
+      <i class="fa-solid fa-rotate-left" aria-hidden="true"></i> Reset
+    </a>
+    {% endif %}
+  </div>
+  <span class="visually-hidden" id="action-status" role="status" aria-live="polite"></span>
+</div>
+<script src="/js/action-buttons.js" defer></script>

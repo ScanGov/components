@@ -59,7 +59,8 @@ Requires in `site.json`:
 | `toc-mobile.html` | Mobile table of contents |
 | `actions.html` | Action buttons |
 | `audio.html` | Audio player |
-| `cta.html` | Fixed bottom band with Plans, Demo, Link and Text buttons (included from `footer.html`) |
+| `action-buttons.html` | Page or document actions: Edit, Copy link, Copy, Download, Print, Reset. Icon-only, `btn-sm`. Needs `public/js/action-buttons.js`. See Action buttons below. |
+| `cta.html` | Fixed bottom band with Plans, Demo, Copy link and Copy buttons (included from `footer.html`) |
 | `connect.html` | Social/connect links |
 | `details.html` | Expandable details |
 | `feedback.html` | Feedback form |
@@ -81,13 +82,39 @@ Two styles, one size rule, defined once in `public/css/scangov.css`:
 | Primary | `btn btn-primary` | The one main action on a view (form submit, Save, Get started) |
 | Secondary | `btn btn-outline-primary` | Everything else (go to a page, Cancel, Close, Edit, Remove, Copy, Download) |
 
-- Default size; `btn-sm` only in a table row or toolbar; no `btn-lg`.
+- Default size. `btn-sm` only for: an icon-only page action toolbar, a table row or cell, a row action inside a card or list, and an "Add" button inside a form. Never for a form submit, Generate, a call to action (Plans, Demo), or a modal confirm. One size per group. No `btn-lg`.
+- Buttons side by side sit in `d-flex gap-2`. `scangov.css` adds a gap for a missed case, but do not rely on it.
+- `btn-sm` has its own, much smaller shadow (`--bs-shadow-sm`: a 1px offset, not 4px). Cards, inputs and regular buttons keep the shared shadow.
 - `<a>` goes somewhere, `<button>` does something. Both take the same classes.
 - Icons are leading and decorative, and always match the label color; the button's `gap` spaces them.
 - Tabs, view switchers, pagination, accordions and the close X are not buttons.
 - `node scripts/check-sync.js` also fails on any other `btn-*` class in a site repo.
 
 The full rules are in the `buttons` skill in [ScanGov/skills](https://github.com/ScanGov/skills), and every state is shown in `public/templates/buttons.html`.
+
+## Action buttons
+
+One set of page actions on every site, in one order: Edit, Copy link, Copy, Download, Print, Share, Rescan, Reset. They are icon-only, `btn-sm`, with `aria-label` and `title`. Reset keeps its text because it clears what the person entered.
+
+| Function | Icon | Label |
+|---|---|---|
+| Edit | `fa-pen` | Edit |
+| Copy link | `fa-link` | Copy link |
+| Copy | `fa-copy` | Copy (a menu: Text, Markdown) |
+| Download | `fa-download` | Download (a menu: HTML, JSON, Markdown, Text, Word) |
+| Print | `fa-print` | Print |
+| Share | `fa-share-from-square` | Share |
+| Rescan | `fa-arrows-rotate` | Rescan |
+| Reset | `fa-rotate-left` | Reset |
+| Back | `fa-arrow-left` | Back |
+| Customize | `fa-sliders` | Customize (text, in an accordion) |
+| Sample | `fa-spray-can-sparkles` | Sample (text) |
+
+- Icon-only fits a toolbar of repeated actions with familiar icons. Keep the text when the action stands alone, is consequential (Reset, Delete, Remove), uses an unfamiliar icon, or is the primary action in a form.
+- Copy and Download are one button each, with a menu. A format that does not apply is left out: formats that need a document are left out when the page has none, a menu with one format is a single button, and a menu with none is removed. A site adds its own formats (CSV, PDF) with `window.sgActions.register(name, definition)`.
+- Messages: an instant action (copy, download) shows a check in the button for 2 seconds and a live region announces it ("Link copied", "Markdown copied", "Downloaded {file}"). A failure shows a toast with text. A long action (rescan, generate) is disabled with a spinner while it runs, then a toast says what happened. Use `window.sgActions.succeed`, `fail`, `setState` and `announce` from JS-built buttons.
+- Include `_includes/action-buttons.html` and `public/js/action-buttons.js`. The page needs `<span id="action-status" ...>`, which the include adds. Print hides action buttons and the call-to-action band.
+- Every state is shown in `public/templates/action-buttons.html`.
 
 ## Scorecard
 
