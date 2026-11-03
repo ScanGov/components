@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Action buttons – ScanGov components</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="../css/scangov.css">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-md border-bottom">
+  <div class="container-fluid">
+    <a class="navbar-brand small" href="index.html">
+      <i class="fa-solid fa-bars-progress me-1" aria-hidden="true"></i>
+      ScanGov
+    </a>
+  </div>
+</nav>
+
+<main id="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 col-md-10 col-lg-8 py-3">
+
+        <h1 class="display-6">Action buttons</h1>
+        <p class="text-body-secondary">
+          Page and document actions: Edit, Copy link, Copy, Download, Print, and Reset. They are icon-only and
+          <code>btn-sm</code>, with <code>aria-label</code> and <code>title</code>. Reset keeps its text because it
+          clears what the person entered. The markup comes from <code>_includes/action-buttons.html</code> and the
+          behavior from <code>public/js/action-buttons.js</code>. In the real include, the Nunjucks variables
+          <code>actionsContentId</code>, <code>actionsFileName</code>, <code>actionsEditHref</code>,
+          <code>actionsPrintHref</code> and <code>actionsResetHref</code> fill the attributes shown here.
+        </p>
+
+        <h2 class="h4 mt-5">The full set</h2>
+        <p class="small text-body-secondary">Copy and Download are menus. Try each item: a check shows in the button for 2 seconds, and a hidden live region announces it.</p>
+        <div id="sample-document" class="border rounded p-3 mb-3">
+          <h2 class="h5">Sample document</h2>
+          <p>This text is what Copy and Download use.</p>
+          <ul><li>A list item</li><li>Another list item</li></ul>
+        </div>
+        <div class="d-flex flex-wrap gap-2 mb-2" data-actions data-content="#sample-document" data-filename="sample">
+          <a href="#" class="btn btn-outline-primary btn-sm" aria-label="Edit" title="Edit"><i class="fa-solid fa-pen" aria-hidden="true"></i></a>
+          <button type="button" class="btn btn-outline-primary btn-sm" data-action="copy-link" aria-label="Copy link" title="Copy link">
+            <i class="fa-solid fa-link" aria-hidden="true"></i><i class="fa-solid fa-check d-none" aria-hidden="true"></i>
+          </button>
+          <div class="dropdown" data-menu="copy">
+            <button type="button" id="copy-menu" class="btn btn-outline-primary btn-sm" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Copy" title="Copy">
+              <i class="fa-solid fa-copy" aria-hidden="true"></i><i class="fa-solid fa-check d-none" aria-hidden="true"></i>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="copy-menu">
+              <li class="small"><button type="button" class="dropdown-item" data-copy="text">Text</button></li>
+              <li class="small"><button type="button" class="dropdown-item" data-copy="md">Markdown</button></li>
+            </ul>
+          </div>
+          <div class="dropdown" data-menu="download">
+            <button type="button" id="download-menu" class="btn btn-outline-primary btn-sm" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download" title="Download">
+              <i class="fa-solid fa-download" aria-hidden="true"></i><i class="fa-solid fa-check d-none" aria-hidden="true"></i>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="download-menu">
+              <li class="small"><button type="button" class="dropdown-item" data-download="html">HTML (.html)</button></li>
+              <li class="small"><button type="button" class="dropdown-item" data-download="json">JSON (.json)</button></li>
+              <li class="small"><button type="button" class="dropdown-item" data-download="md">Markdown (.md)</button></li>
+              <li class="small"><button type="button" class="dropdown-item" data-download="txt">Text (.txt)</button></li>
+              <li class="small"><button type="button" class="dropdown-item" data-download="docx">Word (.docx)</button></li>
+            </ul>
+          </div>
+          <button type="button" class="btn btn-outline-primary btn-sm" data-action="print" aria-label="Print" title="Print">
+            <i class="fa-solid fa-print" aria-hidden="true"></i>
+          </button>
+          <a href="#" class="btn btn-outline-primary btn-sm"><i class="fa-solid fa-rotate-left" aria-hidden="true"></i> Reset</a>
+        </div>
+
+        <h2 class="h4 mt-5">When a format does not apply</h2>
+        <p class="small text-body-secondary">
+          The script leaves out formats that need a document when the page has none, turns a menu with one format into a
+          single button, and removes a menu with none. This bar has no document, so Copy is gone, and Download shows only
+          the CSV a site registered for its table.
+        </p>
+        <div class="d-flex flex-wrap gap-2 mb-2" data-actions data-content="#missing" data-filename="table">
+          <div class="dropdown" data-menu="copy">
+            <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Copy" title="Copy">
+              <i class="fa-solid fa-copy" aria-hidden="true"></i><i class="fa-solid fa-check d-none" aria-hidden="true"></i>
+            </button>
+            <ul class="dropdown-menu"><li class="small"><button type="button" class="dropdown-item" data-copy="text">Text</button></li></ul>
+          </div>
+          <div class="dropdown" data-menu="download">
+            <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download" title="Download">
+              <i class="fa-solid fa-download" aria-hidden="true"></i><i class="fa-solid fa-check d-none" aria-hidden="true"></i>
+            </button>
+            <ul class="dropdown-menu">
+              <li class="small"><button type="button" class="dropdown-item" data-download="html">HTML (.html)</button></li>
+              <li class="small"><button type="button" class="dropdown-item" data-download="csv">CSV (.csv)</button></li>
+            </ul>
+          </div>
+        </div>
+
+        <h2 class="h4 mt-5">Messages</h2>
+        <p class="small text-body-secondary">
+          Instant actions show a check and an announcement. A failure shows a toast with text. A long action is disabled
+          with a spinner while it runs, then a toast says what happened.
+        </p>
+        <div class="d-flex flex-wrap gap-2 mb-2">
+          <button type="button" id="demo-busy" class="btn btn-outline-primary btn-sm" aria-label="Rescan" title="Rescan">
+            <i class="fa-solid fa-arrows-rotate" aria-hidden="true"></i><i class="fa-solid fa-check d-none" aria-hidden="true"></i><i class="fa-solid fa-compact-disc fa-spin d-none" aria-hidden="true"></i>
+          </button>
+          <button type="button" id="demo-fail" class="btn btn-outline-primary btn-sm">Show a failure</button>
+        </div>
+        <span class="visually-hidden" id="action-status" role="status" aria-live="polite"></span>
+
+        <h2 class="h4 mt-5">Sizes</h2>
+        <p class="small text-body-secondary">One size per group. Page actions are <code>btn-sm</code>; a form footer is the default size. The small button has the smaller shadow.</p>
+        <div class="d-flex flex-wrap gap-2 align-items-center mb-2">
+          <button type="button" class="btn btn-outline-primary btn-sm" aria-label="Download" title="Download"><i class="fa-solid fa-download" aria-hidden="true"></i></button>
+          <button type="button" class="btn btn-outline-primary btn-sm" aria-label="Print" title="Print"><i class="fa-solid fa-print" aria-hidden="true"></i></button>
+          <span class="text-body-secondary small">btn-sm, icon-only</span>
+        </div>
+        <div class="d-flex flex-wrap gap-2 align-items-center mb-5">
+          <button type="submit" class="btn btn-primary">Generate</button>
+          <button type="reset" class="btn btn-outline-primary"><i class="fa-solid fa-rotate-left" aria-hidden="true"></i> Reset</button>
+          <span class="text-body-secondary small">Default size, with text, in a form</span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../js/action-buttons.js"></script>
+<script>
+  window.sgActions.register('csv', { label: 'CSV', extension: 'csv', type: 'text/csv', needsDocument: false, build: function () { return 'name,score\nexample.gov,A\n'; } });
+  document.getElementById('demo-busy').addEventListener('click', function () {
+    const button = this;
+    window.sgActions.setState(button, 'busy');
+    window.setTimeout(function () { window.sgActions.setState(button, 'done'); window.sgActions.announce('Rescan started'); window.setTimeout(function () { window.sgActions.setState(button, 'default'); }, 2000); }, 1500);
+  });
+  document.getElementById('demo-fail').addEventListener('click', function () { window.sgActions.fail('Could not copy the link. Select the address bar and copy it.'); });
+</script>
+</body>
+</html>

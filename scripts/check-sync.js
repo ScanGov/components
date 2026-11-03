@@ -48,6 +48,7 @@ function walk(dir, base = dir) {
 
 const trackedFiles = [
   'public/css/scangov.css',
+  'public/js/action-buttons.js',
   // Root templates are copied into each site's content/ directory (see README.md).
   ...['sitemap.njk', 'robots.njk', 'security.njk', 'security-root.njk'].map((f) => ({ source: f, sibling: path.join('content', f) })),
   ...walk(path.join(root, '_includes')).map((f) => path.join('_includes', f)),
@@ -105,6 +106,63 @@ for (const sibling of siblings) {
   if (existsSync(dir)) scanButtons(dir, sibling);
 }
 if (badButtons > 0) outOfSync += badButtons;
+
+// Action buttons: no inline handlers or javascript: links (see the buttons skill).
+// Use a real <a href> or a <button> with data-action and public/js/action-buttons.js.
+let inlineHandlers = 0;
+function scanHandlers(dir, repo) {
+  for (const entry of readdirSync(dir)) {
+    if (buttonSkip.includes(entry) || entry.endsWith('.min.js') || entry.startsWith('bundle') || entry === 'tests' || entry === 'test') continue;
+    const full = path.join(dir, entry);
+    if (statSync(full).isDirectory()) {
+      scanHandlers(full, repo);
+    } else if (/\.(html|njk|md|mjs|js)$/.test(entry)) {
+      readFileSync(full, 'utf8').split('\n').forEach((line, i) => {
+        if (/javascript:void|[ "]onclick=/.test(line)) {
+          inlineHandlers++;
+          console.log(`INLINE HANDLER: ${repo}/${path.relative(path.join(root, '..', repo), full)}:${i + 1}`);
+        }
+      });
+    }
+  }
+}
+for (const sibling of siblings) {
+  const dir = path.join(root, '..', sibling);
+  if (existsSync(dir)) scanHandlers(dir, sibling);
+}
+if (inlineHandlers > 0) outOfSync += inlineHandlers;
+
+// A button or link styled as a button that shows only an icon needs aria-label (and title).
+// Looks at each <a> or <button> with a btn class; if nothing is left once icons are removed
+// and it has no aria-label, it is flagged. Template expressions are skipped.
+let unlabeled = 0;
+function scanLabels(dir, repo) {
+  for (const entry of readdirSync(dir)) {
+    if (buttonSkip.includes(entry) || entry.endsWith('.min.js') || entry.startsWith('bundle') || entry === 'tests' || entry === 'test') continue;
+    const full = path.join(dir, entry);
+    if (statSync(full).isDirectory()) {
+      scanLabels(full, repo);
+    } else if (/\.(html|njk|md|mjs|js)$/.test(entry)) {
+      const text = readFileSync(full, 'utf8');
+      for (const m of text.matchAll(/<(a|button)\b([^>]*\bclass="[^"]*\bbtn\b[^"]*"[^>]*)>([\s\S]*?)<\/\1>/g)) {
+        const [, , attributes, inner] = m;
+        if (/aria-label=|aria-labelledby=/.test(attributes)) continue;
+        if (/\{\{|\{%|\$\{/.test(inner)) continue;
+        const visible = inner.replace(/<svg[\s\S]*?<\/svg>/g, '').replace(/<i\b[^>]*>\s*<\/i>/g, '').replace(/<[^>]+>/g, '').trim();
+        if (visible) continue;
+        if (!/<i\b|<svg\b/.test(inner)) continue;
+        unlabeled++;
+        const line = text.slice(0, m.index).split('\n').length;
+        console.log(`ICON-ONLY BUTTON WITHOUT aria-label: ${repo}/${path.relative(path.join(root, '..', repo), full)}:${line}`);
+      }
+    }
+  }
+}
+for (const sibling of siblings) {
+  const dir = path.join(root, '..', sibling);
+  if (existsSync(dir)) scanLabels(dir, sibling);
+}
+if (unlabeled > 0) outOfSync += unlabeled;
 
 if (outOfSync === 0) {
   console.log(`check-sync: all ${checked} file/repo pairs in sync.`);
