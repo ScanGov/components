@@ -35,6 +35,10 @@ const TERMINOLOGY = [
   { pattern: /\bcitizens?\b/gi, suggestion: 'users', severity: 'error' },
   { pattern: /\bgovernment services\b/gi, suggestion: 'services', severity: 'error' },
   { pattern: /\bgovernment records\b/gi, suggestion: 'data (or "confidential data")', severity: 'error' },
+  // ScanGov is expanding beyond government audits (scangov notes/plans/22, Track 1).
+  // Warnings for now; promote to error once scangov.org's dashboards are clean.
+  { pattern: /\bgovernment websites?\b/gi, suggestion: 'website(s), or just "sites"', severity: 'warn' },
+  { pattern: /\bgovernment sites?\b/gi, suggestion: 'site(s)', severity: 'warn' },
   { pattern: /\bUS\b/g, suggestion: 'U.S. (with periods)', severity: 'error' }, // case-sensitive: bare "US", not the pronoun "us" or "U.S."
 ];
 
