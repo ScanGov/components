@@ -678,6 +678,11 @@ a.list-group-item:hover {
     color: white;
 }
 
+/* Org name with no org page: plain text, so not link blue. */
+.breadcrumb-item span.bc-org {
+    color: white;
+}
+
 [data-bs-theme=light] .bc-sep {
     color: var(--bs-body-color);
 }
@@ -691,6 +696,10 @@ a.list-group-item:hover {
 [data-bs-theme=light] .breadcrumb-item a.bc-domain:visited,
 [data-bs-theme=light] .breadcrumb-item a.bc-org-current,
 [data-bs-theme=light] .breadcrumb-item a.bc-org-current:visited {
+    color: var(--bs-body-color);
+}
+
+[data-bs-theme=light] .breadcrumb-item span.bc-org {
     color: var(--bs-body-color);
 }
 
