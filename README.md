@@ -45,7 +45,7 @@ Requires in `site.json`:
 |------|-------------|
 | `analytics.html` | Google Analytics script (requires `site.gaId`) |
 | `favicon.html` | Favicon link tags |
-| `footer.html` | Site footer |
+| `footer.html` | Site footer. Link columns come from `_data/footer.json`, which docs, standards, data and scangov.org share (copy it; keep a site's own links, such as its feed, in its copy) |
 | `header.html` | Site `<head>` with meta, OG, schema |
 | `jumbotron.html` | Page hero/banner |
 | `jumbotron-default.html` | Default page hero |
