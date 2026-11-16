@@ -6,6 +6,11 @@
      --bs-* / --report-chart-* custom properties in scangov.css, Chart.js's
      own built-in Legend plugin rather than hand-built HTML).
 
+     No numbers inside bars. A bar, or a segment of a part-to-whole bar,
+     carries no value label; the number shows in the hover tip and in the
+     Data table below the chart. A single bar's value may sit beside the bar,
+     outside the fill.
+
      Usage — set these variables, then include this file:
        {% set chartCaption = "What happens when ScanGovBot asks for a county homepage" %}
        {% set chartSubcaption = "2,858 US county websites, September 2026" %}
