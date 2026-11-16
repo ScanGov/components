@@ -4,5 +4,6 @@
   "org": "Organization Name",
   "org-url": "https://example.com",
   "gaId": "G-XXXXXXXXXX",
+  "googleVerify": [],
   "securityExpires": "2027-01-01T00:00:00.000Z"
 }
